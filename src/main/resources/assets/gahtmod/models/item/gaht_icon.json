@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gahtmod:item/creative_inventory_tab/gaht_icon"
+  }
+}

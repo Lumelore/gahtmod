@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "gahtmod",
+	"version": "${version}",
+	"name": "GAHT Mod",
+	"description": "A mod that adds gender affirming hormone therapy to Minecraft.",
+	"authors": [
+		"Lumelore"
+	],
+	"contact": {
+		"homepage": "none",
+		"sources": "to be added"
+	},
+	"license": ["CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/"],
+	"icon": "assets/gahtmod/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"dev.lumelore.gahtmod.GAHTMod"
+		],
+		"client": [
+			"dev.lumelore.gahtmodclient.GAHTModClient"
+		]
+	},
+	"mixins": [
+		"gahtmod.mixins.json",
+		{
+			"config": "gahtmod.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.15.10",
+		"minecraft": "~1.20.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
