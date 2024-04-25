@@ -8,10 +8,10 @@
 		"Lumelore"
 	],
 	"contact": {
-		"homepage": "none",
-		"sources": "to be added"
+		"homepage": "https://github.com/Lumelore/gahtmod/wiki",
+		"sources": "https://github.com/Lumelore/gahtmod"
 	},
-	"license": ["CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/"],
+	"license": "GPL-3.0 license",
 	"icon": "assets/gahtmod/icon.png",
 	"environment": "*",
 	"entrypoints": {
