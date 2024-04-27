@@ -8,7 +8,8 @@
   "item.gahtmod.progesterone_capsule": "Progesterone Capsule",
   "item.gahtmod.testosterone_gel_capsule": "Testosterone Gel Capsule",
   "item.gahtmod.estrogen_blocker": "Estrogen Blocker",
-
   "item.gahtmod.vial_of_estrogen": "Vial of Estrogen",
-  "item.gahtmod.vial_of_testosterone": "Vial of Testosterone"
+  "item.gahtmod.vial_of_testosterone": "Vial of Testosterone",
+
+  "effect.gahtmod.girl_power": "Girl Power"
 }
