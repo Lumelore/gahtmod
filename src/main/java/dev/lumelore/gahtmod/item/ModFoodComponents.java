@@ -13,6 +13,9 @@ public class ModFoodComponents {
     //  2400 ticks is  2 minutes
     //  1200 ticks is  1  minute
 
+    // Used for items that have special effects, such as the blockers
+    public static final FoodComponent NONE_EFFECT_ITEM = new FoodComponent.Builder().alwaysEdible().build();
+
     // Girl Power I for 8 minutes and Regeneration I for 1 minute
     public static final FoodComponent ESTROGEN_ITEM = new FoodComponent.Builder().alwaysEdible()
             .statusEffect(new StatusEffectInstance(ModEffects.GIRL_POWER, 9600, 0), 1f)
