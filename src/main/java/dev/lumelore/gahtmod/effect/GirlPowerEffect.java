@@ -3,11 +3,15 @@ package dev.lumelore.gahtmod.effect;
 
 import dev.lumelore.gahtmod.util.EntityDataSaver;
 import dev.lumelore.mixin.PlayerEntityAccessor;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.sound.SoundEvents;
 
 public class GirlPowerEffect extends StatusEffect {
 
@@ -51,6 +55,9 @@ public class GirlPowerEffect extends StatusEffect {
                     dashCooldownData.putInt("dashCooldown", 30);
                     dashCooldownData.putInt("absoluteDashCooldown", 15);
                 }
+
+                // Add audio to dash
+                ((PlayerEntity) entity).playSound(SoundEvents.ENTITY_BREEZE_JUMP, 1f, 0.75f);
             }
             // If they touch the ground, zero the regular dashCooldown
             else if (entity.isOnGround()) {
@@ -59,11 +66,30 @@ public class GirlPowerEffect extends StatusEffect {
             // Reduce both timers until they hit zero
             if (dashCooldownData.getInt("dashCooldown") > 0) {
                 dashCooldownData.putInt("dashCooldown", dashCooldownData.getInt("dashCooldown") - 1);
+                // Play recharge noise if zero
+                playRechargeSoundIfRecharged((PlayerEntity) entity, dashCooldownData);
             }
             if (dashCooldownData.getInt("absoluteDashCooldown") > 0) {
                 dashCooldownData.putInt("absoluteDashCooldown", dashCooldownData.getInt("absoluteDashCooldown") - 1);
+                // Play recharge noise if zero
+                playRechargeSoundIfRecharged((PlayerEntity) entity, dashCooldownData);
             }
+            // Spawn Particles if the player has recently dashed
+            spawnParticleIfDashed((PlayerEntity) entity, dashCooldownData);
+        }
+    }
 
+    private void playRechargeSoundIfRecharged(PlayerEntity player, NbtCompound dashCooldownData) {
+        if (dashCooldownData.getInt("dashCooldown") == 0 && dashCooldownData.getInt("absoluteDashCooldown") == 0) {
+            player.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1f, 2);
+        }
+    }
+
+    private void spawnParticleIfDashed(PlayerEntity player, NbtCompound dashCooldownData) {
+        if (dashCooldownData.getInt("dashCooldown") > 45) {
+                player.getWorld().addParticle(ParticleTypes.CLOUD,
+                        player.getX(), player.getY() + 0.2, player.getZ(),
+                        0, 0, 0);
         }
     }
 
