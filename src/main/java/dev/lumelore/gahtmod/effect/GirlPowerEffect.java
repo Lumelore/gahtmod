@@ -8,14 +8,11 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.text.Text;
 
 public class GirlPowerEffect extends StatusEffect {
 
-
-
     public GirlPowerEffect() {
-        // Color is a saturated berry red/pink
+        // Color is a saturated berry red/pink :3
         super(StatusEffectCategory.BENEFICIAL, 0xDE2A84);
     }
 
@@ -25,7 +22,6 @@ public class GirlPowerEffect extends StatusEffect {
         return true;
 
     }
-
 
     // This is the implementation of the actual effect
     // dashCooldown - Integer which stores the time in ticks until the player can dash again but zeros when player hits ground.
@@ -43,12 +39,18 @@ public class GirlPowerEffect extends StatusEffect {
             // Both dashCooldowns are zero
             if (!entity.isOnGround() && ((PlayerEntityAccessor) entity).getJumpingCooldown() < 5 && ((PlayerEntityAccessor) entity).getJumping()
                     && dashCooldownData.getInt("dashCooldown") == 0 && dashCooldownData.getInt("absoluteDashCooldown") == 0) {
-
                 // Add to their velocity and reset the cooldown
                 ((PlayerEntity) entity).addVelocity(entity.getRotationVector().multiply((amplifier + 1) * 0.8));
-                dashCooldownData.putInt("dashCooldown", 60);
-                dashCooldownData.putInt("absoluteDashCooldown", 30);
 
+                //If the player has boy power, half the cooldown time
+                if (entity.getStatusEffect(ModEffects.BOY_POWER) == null) {
+                    dashCooldownData.putInt("dashCooldown", 60);
+                    dashCooldownData.putInt("absoluteDashCooldown", 30);
+                }
+                else {
+                    dashCooldownData.putInt("dashCooldown", 30);
+                    dashCooldownData.putInt("absoluteDashCooldown", 15);
+                }
             }
             // If they touch the ground, zero the regular dashCooldown
             else if (entity.isOnGround()) {
@@ -64,6 +66,5 @@ public class GirlPowerEffect extends StatusEffect {
 
         }
     }
-
 
 }
