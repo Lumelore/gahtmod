@@ -86,10 +86,16 @@ public class GirlPowerEffect extends StatusEffect {
     }
 
     private void spawnParticleIfDashed(PlayerEntity player, NbtCompound dashCooldownData) {
-        if (dashCooldownData.getInt("dashCooldown") > 45) {
-                player.getWorld().addParticle(ParticleTypes.CLOUD,
-                        player.getX(), player.getY() + 0.2, player.getZ(),
-                        0, 0, 0);
+        // Account for faster recharge time if both effects are active
+        if (player.getStatusEffect(ModEffects.BOY_POWER) == null && dashCooldownData.getInt("dashCooldown") > 45) {
+            player.getWorld().addParticle(ParticleTypes.CLOUD,
+                    player.getX(), player.getY() + 0.2, player.getZ(),
+                    0, 0, 0);
+        }
+        else if (player.getStatusEffect(ModEffects.BOY_POWER) != null && dashCooldownData.getInt("dashCooldown") > 15) {
+            player.getWorld().addParticle(ParticleTypes.CLOUD,
+                    player.getX(), player.getY() + 0.2, player.getZ(),
+                    0, 0, 0);
         }
     }
 
