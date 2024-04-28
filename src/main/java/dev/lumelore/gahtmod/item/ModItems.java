@@ -28,8 +28,9 @@ public abstract class ModItems {
     public static final Item BOTTLE_OF_ESTROGEN = registerItem("bottle_of_estrogen", new BottleOfEstrogenItem(new FabricItemSettings().food(ModFoodComponents.STRONG_ESTROGEN_ITEM)));
     public static final Item BOTTLE_OF_TESTOSTERONE = registerItem("bottle_of_testosterone", new BottleOfTestosteroneItem(new FabricItemSettings().food(ModFoodComponents.STRONG_TESTOSTERONE_ITEM)));
 
-    // Genderfluid
+    // Genderfluid and agender Items
     public static final Item BOTTLE_OF_GENDERFLUID = registerItem("bottle_of_genderfluid", new BottleOfGenderfluidItem(new FabricItemSettings().food(ModFoodComponents.NONE_EFFECT_ITEM)));
+    public static final Item BOTTLE_OF_AGENDER = registerItem("bottle_of_agender", new BottleOfAgenderItem(new FabricItemSettings().food(ModFoodComponents.NONE_EFFECT_ITEM)));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(GAHTMod.MOD_ID, name), item);
