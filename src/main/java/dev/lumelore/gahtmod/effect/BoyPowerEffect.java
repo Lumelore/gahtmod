@@ -21,7 +21,6 @@ public class BoyPowerEffect extends StatusEffect {
     @Override
     public boolean canApplyUpdateEffect(int duration, int amplifier) {
         return true;
-
     }
 
     // This is the implementation of the actual effect
