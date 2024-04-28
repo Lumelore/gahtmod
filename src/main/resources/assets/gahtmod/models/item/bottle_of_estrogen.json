@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gahtmod:item/vial_of_testosterone"
+    "layer0": "gahtmod:item/bottle_of_estrogen"
   }
 }
