@@ -28,8 +28,6 @@ public class EnbyPowerEffect extends StatusEffect {
             if (entity.horizontalCollision && canClimb((PlayerEntity) entity)) {
                 entity.setVelocity(entity.getVelocity().getX(), 0.2, entity.getVelocity().getZ());
             }
-
-
         }
     }
 
