@@ -1,15 +1,12 @@
 package dev.lumelore.gahtmod.effect;
 
-
 import dev.lumelore.gahtmod.util.EntityDataSaver;
 import dev.lumelore.mixin.PlayerEntityAccessor;
-import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
 
