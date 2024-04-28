@@ -5,6 +5,7 @@ import dev.lumelore.gahtmod.effect.GirlPowerEffect;
 import dev.lumelore.gahtmod.effect.ModEffects;
 import dev.lumelore.gahtmod.item.ModItemGroups;
 import dev.lumelore.gahtmod.item.ModItems;
+import dev.lumelore.gahtmod.sound.ModSounds;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -32,9 +33,10 @@ public class GAHTMod implements ModInitializer {
 		// Registers for items and groups
 		ModItems.registerModItems();
 		ModItemGroups.registerItemGroups();
-		//Registers for effects
+		// Registers for effects
 		ModEffects.registerModEffects();
-
+		// Registers for sounds
+		ModSounds.registerSounds();
 
 
 
