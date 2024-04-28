@@ -21,8 +21,11 @@ public abstract class ModItemGroups {
                         entries.add(ModItems.PROGESTERONE_CAPSULE);
                         entries.add(ModItems.TESTOSTERONE_GEL_CAPSULE);
                         entries.add(ModItems.ESTROGEN_BLOCKER);
-                        entries.add(ModItems.VIAL_OF_ESTROGEN);
-                        entries.add(ModItems.VIAL_OF_TESTOSTERONE);
+                        entries.add(ModItems.ENBY_JUICE);
+                        entries.add(ModItems.LARGE_ENBY_JUICE);
+                        entries.add(ModItems.BOTTLE_OF_ESTROGEN);
+                        entries.add(ModItems.BOTTLE_OF_TESTOSTERONE);
+                        entries.add(ModItems.BOTTLE_OF_GENDERFLUID);
                     })
                     .build());
 

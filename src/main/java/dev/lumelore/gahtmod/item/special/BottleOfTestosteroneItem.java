@@ -13,9 +13,9 @@ import net.minecraft.stat.Stats;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 
-public class VialOfTestosteroneItem extends Item {
+public class BottleOfTestosteroneItem extends Item {
 
-    public VialOfTestosteroneItem(Settings settings) {
+    public BottleOfTestosteroneItem(Settings settings) {
         super(settings);
     }
 

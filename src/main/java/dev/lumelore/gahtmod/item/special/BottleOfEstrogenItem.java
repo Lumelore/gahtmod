@@ -2,7 +2,6 @@ package dev.lumelore.gahtmod.item.special;
 
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,9 +13,9 @@ import net.minecraft.stat.Stats;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 
-public class VialOfEstrogenItem extends Item {
+public class BottleOfEstrogenItem extends Item {
 
-    public VialOfEstrogenItem(Settings settings) {
+    public BottleOfEstrogenItem(Settings settings) {
         super(settings);
     }
 
