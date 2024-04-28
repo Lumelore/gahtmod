@@ -27,6 +27,10 @@ public class EnbyPowerEffect extends StatusEffect {
         if (entity instanceof PlayerEntity) {
             if (entity.horizontalCollision && canClimb((PlayerEntity) entity)) {
                 entity.setVelocity(entity.getVelocity().getX(), 0.2, entity.getVelocity().getZ());
+
+            }
+            else if (canClimb((PlayerEntity) entity) && entity.isSneaking()) {
+                entity.setVelocity(entity.getVelocity().getX(), 0, entity.getVelocity().getZ());
             }
         }
     }
@@ -39,8 +43,8 @@ public class EnbyPowerEffect extends StatusEffect {
         if (!closetBlock.equals(Optional.empty())) {
             return true;
         }
-        // Can also climb if block underneath closetBlock is solid, but block underneath feet isn't.
-        else if (closetBlockUnder.isPresent() && entity.getWorld().getBlockState(closetBlockUnder.get().down()).isSolid() && !entity.getWorld().getBlockState(entity.getBlockPos().down()).isSolid()) {
+        // Can also climb if block underneath closetBlock is solid, but player is not on the ground.
+        else if (closetBlockUnder.isPresent() && entity.getWorld().getBlockState(closetBlockUnder.get().down()).isSolid() && !entity.isOnGround()) {
             return true;
         }
         return false;
