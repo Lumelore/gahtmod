@@ -6,7 +6,6 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 public class EnbyPowerEffect extends StatusEffect {
