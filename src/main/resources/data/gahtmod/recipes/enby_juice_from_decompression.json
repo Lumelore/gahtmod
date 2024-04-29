@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "gahtmod.enby_juice",
+  "ingredients": [
+    {"item": "gahtmod:large_enby_juice"}
+  ],
+  "result": {
+    "item": "gahtmod:enby_juice",
+    "count": 3
+  }
+}

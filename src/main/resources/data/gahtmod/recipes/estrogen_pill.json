@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {"item": "minecraft:prismarine_shard"},
+    {"item": "minecraft:sugar"},
+    {"item": "minecraft:light_blue_dye"}
+  ],
+  "result": {
+    "item": "gahtmod:estrogen_pill",
+    "count": 1
+  }
+}

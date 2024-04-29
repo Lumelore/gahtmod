@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {"item": "minecraft:magma_cream"},
+    {"item": "minecraft:nether_wart"},
+    {"item": "minecraft:red_dye"}
+  ],
+  "result": {
+    "item": "gahtmod:estrogen_blocker",
+    "count": 1
+  }
+}
