@@ -10,6 +10,7 @@ import net.minecraft.util.Identifier;
 import static dev.lumelore.gahtmod.GAHTMod.MOD_ID;
 
 public class ModEffects {
+
     // Registers for effects
     public static final RegistryEntry<StatusEffect> GIRL_POWER = Registry.registerReference(Registries.STATUS_EFFECT, new Identifier(MOD_ID, "girl_power"), new GirlPowerEffect());
     public static final RegistryEntry<StatusEffect> BOY_POWER = Registry.registerReference(Registries.STATUS_EFFECT, new Identifier(MOD_ID, "boy_power"), new BoyPowerEffect());
