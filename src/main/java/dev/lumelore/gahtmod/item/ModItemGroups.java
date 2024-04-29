@@ -26,6 +26,7 @@ public abstract class ModItemGroups {
                         entries.add(ModItems.BOTTLE_OF_ESTROGEN);
                         entries.add(ModItems.BOTTLE_OF_TESTOSTERONE);
                         entries.add(ModItems.BOTTLE_OF_GENDERFLUID);
+                        entries.add(ModItems.BOTTLE_OF_AGENDER);
                     })
                     .build());
 
