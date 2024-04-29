@@ -15,7 +15,5 @@ public interface PlayerEntityAccessor {
 
 	@Accessor
 	int getJumpingCooldown();
-	@Accessor("jumpingCooldown")
-	public void setJumpingCooldown(int jumpingCooldown);
 }
 

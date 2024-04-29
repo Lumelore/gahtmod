@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {"item": "gahtmod:testosterone_gel_capsule"},
+    {"item": "gahtmod:testosterone_gel_capsule"},
+    {"item": "gahtmod:testosterone_gel_capsule"},
+    {"item": "minecraft:potion"}
+  ],
+  "result": {
+    "item": "gahtmod:bottle_of_testosterone",
+    "count": 1
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "gahtmod.enby_juice",
+  "ingredients": [
+    {"item": "minecraft:amethyst_shard"},
+    {"item": "minecraft:honey_bottle"},
+    {"item": "minecraft:black_dye"}
+  ],
+  "result": {
+    "item": "gahtmod:enby_juice",
+    "count": 1
+  }
+}

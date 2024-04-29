@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "gahtmod.genderfluid",
+  "ingredients": [
+    {"item": "gahtmod:enby_juice"},
+    {"item": "gahtmod:estrogen_pill"},
+    {"item": "gahtmod:testosterone_blocker"},
+    {"item": "gahtmod:testosterone_gel_capsule"},
+    {"item": "gahtmod:estrogen_blocker"},
+    {"item": "minecraft:potion"},
+    {"item": "minecraft:potion"},
+    {"item": "minecraft:potion"},
+    {"item": "minecraft:potion"}
+  ],
+  "result": {
+    "item": "gahtmod:bottle_of_genderfluid",
+    "count": 5
+  }
+}

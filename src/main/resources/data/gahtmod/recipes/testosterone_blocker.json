@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {"item": "minecraft:prismarine_shard"},
+    {"item": "minecraft:nether_wart"},
+    {"item": "minecraft:white_dye"}
+  ],
+  "result": {
+    "item": "gahtmod:testosterone_blocker",
+    "count": 1
+  }
+}

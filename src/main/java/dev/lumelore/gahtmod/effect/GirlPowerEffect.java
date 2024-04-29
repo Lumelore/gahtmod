@@ -1,15 +1,13 @@
 package dev.lumelore.gahtmod.effect;
 
-
+import dev.lumelore.gahtmod.sound.ModSounds;
 import dev.lumelore.gahtmod.util.EntityDataSaver;
 import dev.lumelore.mixin.PlayerEntityAccessor;
-import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
 
@@ -57,7 +55,7 @@ public class GirlPowerEffect extends StatusEffect {
                 }
 
                 // Add audio to dash
-                ((PlayerEntity) entity).playSound(SoundEvents.ENTITY_BREEZE_JUMP, 1f, 0.75f);
+                ((PlayerEntity) entity).playSound(ModSounds.DASH, 1f, (float) (1 + (Math.random() * 0.25)));
             }
             // If they touch the ground, zero the regular dashCooldown
             else if (entity.isOnGround()) {
@@ -81,7 +79,7 @@ public class GirlPowerEffect extends StatusEffect {
 
     private void playRechargeSoundIfRecharged(PlayerEntity player, NbtCompound dashCooldownData) {
         if (dashCooldownData.getInt("dashCooldown") == 0 && dashCooldownData.getInt("absoluteDashCooldown") == 0) {
-            player.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1f, 2);
+            player.playSound(ModSounds.DASH_RECHARGE, 1f, 1f);
         }
     }
 

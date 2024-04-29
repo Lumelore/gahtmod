@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {"item": "gahtmod:bottle_of_agender"},
+    {"item": "gahtmod:bottle_of_gender"}
+  ],
+  "result": {
+    "item": "minecraft:glass_bottle",
+    "count": 2
+  }
+}

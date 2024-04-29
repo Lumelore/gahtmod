@@ -8,9 +8,28 @@
   "item.gahtmod.progesterone_capsule": "Progesterone Capsule",
   "item.gahtmod.testosterone_gel_capsule": "Testosterone Gel Capsule",
   "item.gahtmod.estrogen_blocker": "Estrogen Blocker",
-  "item.gahtmod.vial_of_estrogen": "Vial of Estrogen",
-  "item.gahtmod.vial_of_testosterone": "Vial of Testosterone",
+  "item.gahtmod.enby_juice": "Enby Juice",
+  "item.gahtmod.large_enby_juice": "Large Enby Juice",
+  "item.gahtmod.bottle_of_estrogen": "Bottle of Estrogen",
+  "item.gahtmod.bottle_of_testosterone": "Bottle of Testosterone",
+  "item.gahtmod.bottle_of_genderfluid": "Bottle of Genderfluid",
+  "item.gahtmod.bottle_of_agender": "Bottle of Agender",
+  "item.gahtmod.bottle_of_gender": "Bottle of Gender",
+
 
   "effect.gahtmod.girl_power": "Girl Power",
-  "effect.gahtmod.boy_power": "Boy Power"
+  "effect.gahtmod.boy_power": "Boy Power",
+  "effect.gahtmod.enby_power": "Enby Power",
+
+
+  "sounds.gahtmod.reverse_drinking": "Reversed sipping",
+  "sounds.gahtmod.dash": "Dash whoosh",
+  "sounds.gahtmod.dash_recharge": "Dash recharged",
+
+
+  "tooltip.gahtmod.blocker_item": "Removes effects: ",
+  "tooltip.gahtmod.bottle_of_agender": "Removes genders",
+  "tooltip.gahtmod.bottle_of_genderfluid1": "Applies or removes random genders",
+  "tooltip.gahtmod.possible_effects": "Possible effects: "
+
 }

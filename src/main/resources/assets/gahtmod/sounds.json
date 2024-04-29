@@ -1,0 +1,14 @@
+{
+  "reverse_drinking": {
+    "subtitle": "sounds.gahtmod.reverse_drinking",
+    "sounds": ["gahtmod:reverse_drinking"]
+  },
+  "dash": {
+    "subtitle": "sounds.gahtmod.dash",
+    "sounds": ["gahtmod:dash"]
+  },
+  "dash_recharge": {
+    "subtitle": "sounds.gahtmod.dash_recharge",
+    "sounds": ["gahtmod:dash_recharge"]
+  }
+}
