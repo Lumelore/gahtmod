@@ -9,7 +9,7 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.sound.SoundEvents;
 
 public class BoyPowerEffect extends StatusEffect {
 
@@ -28,11 +28,11 @@ public class BoyPowerEffect extends StatusEffect {
     // dashCooldown - Integer which stores the time in ticks until the player can dash again but zeros when player hits ground.
     // absoluteDashCooldown - Integer which stores the time in ticks until the player can dash again.
     @Override
-    public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
+    public void applyUpdateEffect(LivingEntity entity, int amplifier) {
         // Only apply effect to players
         if (entity instanceof PlayerEntity) {
             // Don't apply effect twice if the player also has girl power
-            if (entity.getStatusEffect((RegistryEntry<StatusEffect>) ModEffects.GIRL_POWER) == null) {
+            if (entity.getStatusEffect(ModEffects.GIRL_POWER) == null) {
                 // Nbt stuff storing the mods data
                 NbtCompound dashCooldownData = ((EntityDataSaver) entity).getPersistentData();
                 // Make the Player Dash Only if
@@ -69,7 +69,6 @@ public class BoyPowerEffect extends StatusEffect {
                 spawnParticleIfDashed((PlayerEntity) entity, dashCooldownData);
             }
         }
-        return true;
     }
 
     private void playRechargeSoundIfRecharged(PlayerEntity player, NbtCompound dashCooldownData) {
@@ -80,7 +79,7 @@ public class BoyPowerEffect extends StatusEffect {
 
     private void spawnParticleIfDashed(PlayerEntity player, NbtCompound dashCooldownData) {
         if (dashCooldownData.getInt("dashCooldown") > 45) {
-            player.getWorld().addParticle(ParticleTypes.CLOUD,
+            player.method_48926().addParticle(ParticleTypes.CLOUD,
                     player.getX(), player.getY() + 0.2, player.getZ(),
                     0, 0, 0);
         }

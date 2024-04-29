@@ -2,15 +2,14 @@ package dev.lumelore.gahtmod.item.special;
 
 import dev.lumelore.gahtmod.effect.ModEffects;
 import net.minecraft.advancement.criterion.Criteria;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffectUtil;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -27,7 +26,7 @@ import java.util.List;
 
 public class TestosteroneBlockerItem extends Item {
 
-    public TestosteroneBlockerItem(Settings settings) {
+    public TestosteroneBlockerItem(net.minecraft.item.Item.Settings settings) {
         super(settings);
     }
 
@@ -42,23 +41,21 @@ public class TestosteroneBlockerItem extends Item {
         }
         // Remove the following statuses
         if (!world.isClient) {
-            user.removeStatusEffect((RegistryEntry<StatusEffect>) ModEffects.BOY_POWER);
+            user.removeStatusEffect(ModEffects.BOY_POWER);
             user.removeStatusEffect(StatusEffects.WITHER);
             user.removeStatusEffect(StatusEffects.WEAKNESS);
             user.removeStatusEffect(StatusEffects.SLOWNESS);
         }
         return stack;
     }
-    /*
+
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, net.minecraft.item.Item.TooltipContext context) {
         tooltip.add(Text.translatable("tooltip.gahtmod.blocker_item").formatted(Formatting.DARK_PURPLE));
         tooltip.add(Text.translatable(ModEffects.BOY_POWER.getTranslationKey()).formatted(ModEffects.BOY_POWER.getCategory().getFormatting()));
-        tooltip.add(Text.translatable(StatusEffects.SLOWNESS.).formatted(StatusEffects.SLOWNESS.getCategory().getFormatting()));
+        tooltip.add(Text.translatable(StatusEffects.SLOWNESS.getTranslationKey()).formatted(StatusEffects.SLOWNESS.getCategory().getFormatting()));
         tooltip.add(Text.translatable(StatusEffects.WEAKNESS.getTranslationKey()).formatted(StatusEffects.WEAKNESS.getCategory().getFormatting()));
         tooltip.add(Text.translatable(StatusEffects.WITHER.getTranslationKey()).formatted(StatusEffects.WITHER.getCategory().getFormatting()));
         super.appendTooltip(stack, world, tooltip, context);
     }
-    */
-
 }
