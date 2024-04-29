@@ -2,7 +2,6 @@ package dev.lumelore.gahtmod.item.special;
 
 import dev.lumelore.gahtmod.effect.ModEffects;
 import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffectUtil;
@@ -71,6 +70,7 @@ public class LargeEnbyJuiceItem extends Item {
         return SoundEvents.ITEM_HONEY_BOTTLE_DRINK;
     }
 
+    /*
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(Text.translatable(ModEffects.ENBY_POWER.getTranslationKey()).formatted(ModEffects.ENBY_POWER.getCategory().getFormatting())
@@ -82,5 +82,5 @@ public class LargeEnbyJuiceItem extends Item {
                 .append(StatusEffectUtil.getDurationText(new StatusEffectInstance(StatusEffects.RESISTANCE, 2400), 1f, world == null ? 20.0f : world.getTickManager().getTickRate()))
                 .append(")"));
         super.appendTooltip(stack, world, tooltip, context);
-    }
+    }*/
 }

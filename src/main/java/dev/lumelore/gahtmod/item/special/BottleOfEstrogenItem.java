@@ -2,11 +2,7 @@ package dev.lumelore.gahtmod.item.special;
 
 import dev.lumelore.gahtmod.effect.ModEffects;
 import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffectUtil;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -69,6 +65,7 @@ public class BottleOfEstrogenItem extends Item {
         return SoundEvents.ITEM_HONEY_BOTTLE_DRINK;
     }
 
+    /*
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(Text.translatable(ModEffects.GIRL_POWER.getTranslationKey()).formatted(ModEffects.GIRL_POWER.getCategory().getFormatting())
@@ -80,5 +77,5 @@ public class BottleOfEstrogenItem extends Item {
                 .append(StatusEffectUtil.getDurationText(new StatusEffectInstance(StatusEffects.REGENERATION, 2400), 1f, world == null ? 20.0f : world.getTickManager().getTickRate()))
                 .append(")"));
         super.appendTooltip(stack, world, tooltip, context);
-    }
+    }*/
 }

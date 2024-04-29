@@ -1,7 +1,6 @@
 package dev.lumelore.gahtmod.item.special;
 
 import dev.lumelore.gahtmod.effect.ModEffects;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffectUtil;
 import net.minecraft.entity.effect.StatusEffects;
@@ -18,7 +17,7 @@ public class EstrogenPillItem extends Item {
     public EstrogenPillItem(Settings settings) {
         super(settings);
     }
-
+    /*
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(Text.translatable(ModEffects.GIRL_POWER.getTranslationKey()).formatted(ModEffects.GIRL_POWER.getCategory().getFormatting())
@@ -30,5 +29,5 @@ public class EstrogenPillItem extends Item {
                 .append(StatusEffectUtil.getDurationText(new StatusEffectInstance(StatusEffects.REGENERATION, 1200), 1f, world == null ? 20.0f : world.getTickManager().getTickRate()))
                 .append(")"));
         super.appendTooltip(stack, world, tooltip, context);
-    }
+    }*/
 }

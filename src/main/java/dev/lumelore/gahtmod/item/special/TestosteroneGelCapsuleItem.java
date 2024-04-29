@@ -1,7 +1,6 @@
 package dev.lumelore.gahtmod.item.special;
 
 import dev.lumelore.gahtmod.effect.ModEffects;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffectUtil;
 import net.minecraft.entity.effect.StatusEffects;
@@ -18,7 +17,7 @@ public class TestosteroneGelCapsuleItem extends Item {
     public TestosteroneGelCapsuleItem(Settings settings) {
         super(settings);
     }
-
+    /*
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(Text.translatable(ModEffects.BOY_POWER.getTranslationKey()).formatted(ModEffects.BOY_POWER.getCategory().getFormatting())
@@ -31,4 +30,6 @@ public class TestosteroneGelCapsuleItem extends Item {
                 .append(")"));
         super.appendTooltip(stack, world, tooltip, context);
     }
+
+     */
 }

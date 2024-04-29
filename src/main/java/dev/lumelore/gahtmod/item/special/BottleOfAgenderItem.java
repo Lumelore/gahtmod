@@ -4,7 +4,7 @@ import dev.lumelore.gahtmod.effect.ModEffects;
 import dev.lumelore.gahtmod.item.ModItems;
 import dev.lumelore.gahtmod.sound.ModSounds;
 import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.item.TooltipType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -91,8 +91,12 @@ public class BottleOfAgenderItem extends Item {
             tempArr[4] = player.getStatusEffect(ModEffects.ENBY_POWER).getDuration();
             tempArr[5] = player.getStatusEffect(ModEffects.ENBY_POWER).getAmplifier();
         }
-        stack.setNbt(new NbtCompound());
+        // TODO: FIX CUSTOM DATA ON ITEM
+        /*
+        stack.set(new DataComponen);
         stack.getNbt().putIntArray("gahtmod.stored_gender", tempArr);
+        */
+
     }
 
     @Override
@@ -111,8 +115,8 @@ public class BottleOfAgenderItem extends Item {
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+    public void appendTooltip(ItemStack stack, TooltipContext tooltipContext, List<Text> tooltip, TooltipType type) {
         tooltip.add(Text.translatable("tooltip.gahtmod.bottle_of_agender").formatted(Formatting.GRAY));
-        super.appendTooltip(stack, world, tooltip, context);
+        super.appendTooltip(stack, tooltipContext, tooltip, type);
     }
 }

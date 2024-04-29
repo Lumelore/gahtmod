@@ -22,7 +22,7 @@ public class EnbyPowerEffect extends StatusEffect {
     }
 
     @Override
-    public void applyUpdateEffect(LivingEntity entity, int amplifier) {
+    public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         if (entity instanceof PlayerEntity) {
             if (entity.horizontalCollision && canClimb((PlayerEntity) entity)) {
                 entity.setVelocity(entity.getVelocity().getX(), 0.2, entity.getVelocity().getZ());
@@ -32,6 +32,7 @@ public class EnbyPowerEffect extends StatusEffect {
                 entity.setVelocity(entity.getVelocity().getX(), 0, entity.getVelocity().getZ());
             }
         }
+        return true;
     }
 
     private boolean canClimb(PlayerEntity entity) {

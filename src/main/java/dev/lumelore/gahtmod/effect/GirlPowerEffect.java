@@ -29,7 +29,7 @@ public class GirlPowerEffect extends StatusEffect {
     // dashCooldown - Integer which stores the time in ticks until the player can dash again but zeros when player hits ground.
     // absoluteDashCooldown - Integer which stores the time in ticks until the player can dash again.
     @Override
-    public void applyUpdateEffect(LivingEntity entity, int amplifier) {
+    public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         // Only apply effect to players
         if (entity instanceof PlayerEntity) {
             // Nbt stuff storing the mods data
@@ -75,6 +75,7 @@ public class GirlPowerEffect extends StatusEffect {
             // Spawn Particles if the player has recently dashed
             spawnParticleIfDashed((PlayerEntity) entity, dashCooldownData);
         }
+        return true;
     }
 
     private void playRechargeSoundIfRecharged(PlayerEntity player, NbtCompound dashCooldownData) {

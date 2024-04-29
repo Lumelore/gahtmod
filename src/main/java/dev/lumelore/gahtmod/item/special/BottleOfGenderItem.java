@@ -3,7 +3,6 @@ package dev.lumelore.gahtmod.item.special;
 import dev.lumelore.gahtmod.effect.ModEffects;
 import dev.lumelore.gahtmod.item.ModItems;
 import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffectUtil;
@@ -77,6 +76,7 @@ public class BottleOfGenderItem extends Item {
         return SoundEvents.ITEM_HONEY_BOTTLE_DRINK;
     }
 
+    /*
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         if (stack.hasNbt()) {
@@ -103,9 +103,10 @@ public class BottleOfGenderItem extends Item {
                         .append(")"));
             }
         }
-    }
+    }*/
 
     private void applyEffects(PlayerEntity player, ItemStack itemStack) {
+        /*
         System.out.println("Here1");
         if (itemStack.hasNbt()) {
             System.out.println("Here2");
@@ -122,7 +123,7 @@ public class BottleOfGenderItem extends Item {
             if (effects[4] > 0) {
                 player.addStatusEffect(new StatusEffectInstance(ModEffects.ENBY_POWER, effects[4], effects[5]));
             }
-        }
+        }*/
     }
 
 }

@@ -2,7 +2,6 @@ package dev.lumelore.gahtmod.item.special;
 
 import dev.lumelore.gahtmod.effect.ModEffects;
 import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -12,6 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -54,8 +54,8 @@ public class BottleOfGenderfluidItem extends Item {
             }
             // Give the following statuses randomly
             if (!world.isClient) {
-                ArrayList<StatusEffect> pool = new ArrayList<>(List.of(ModEffects.GIRL_POWER, ModEffects.BOY_POWER, ModEffects.ENBY_POWER));
-                StatusEffect toApply;
+                ArrayList<RegistryEntry<StatusEffect>> pool = new ArrayList<>(List.of(ModEffects.GIRL_POWER, ModEffects.BOY_POWER, ModEffects.ENBY_POWER));
+                RegistryEntry<StatusEffect> toApply;
                 boolean goAgain = true;
                 do {
                     // Decide if should pick another effect
@@ -69,7 +69,7 @@ public class BottleOfGenderfluidItem extends Item {
                     // If user has the effect, and it is the first one chosen, change it to a different effect
                     // Make sure they do not have the effect first, if they do then remove the current effect
                     else if (pool.size() == 2) {
-                        StatusEffect toRemove = toApply;
+                        RegistryEntry<StatusEffect> toRemove = toApply;
                         toApply = pool.remove((int) (Math.random() * pool.size()));
                         // give them the new effect
                         if (userHasWorseGenderEffect((PlayerEntity) user, toApply)) {
@@ -98,7 +98,7 @@ public class BottleOfGenderfluidItem extends Item {
     public SoundEvent getEatSound() {
         return SoundEvents.ITEM_HONEY_BOTTLE_DRINK;
     }
-
+    /*
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(Text.translatable("tooltip.gahtmod.bottle_of_genderfluid1").formatted(Formatting.GRAY));
@@ -119,9 +119,9 @@ public class BottleOfGenderfluidItem extends Item {
                 .append(StatusEffectUtil.getDurationText(new StatusEffectInstance(ModEffects.ENBY_POWER, 9600), 1f, world == null ? 20.0f : world.getTickManager().getTickRate()))
                 .append(")"));
         super.appendTooltip(stack, world, tooltip, context);
-    }
+    }*/
 
-    private void giveGenderEffect(PlayerEntity user, StatusEffect genderEffect) {
+    private void giveGenderEffect(PlayerEntity user, RegistryEntry<StatusEffect> genderEffect) {
         user.addStatusEffect(new StatusEffectInstance(genderEffect, 9600, 0));
         if (genderEffect == ModEffects.GIRL_POWER) {
             user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 600, 0));
@@ -134,7 +134,7 @@ public class BottleOfGenderfluidItem extends Item {
         }
     }
 
-    private boolean userHasWorseGenderEffect(PlayerEntity user, StatusEffect genderEffect) {
+    private boolean userHasWorseGenderEffect(PlayerEntity user, RegistryEntry<StatusEffect> genderEffect) {
         // if user has status effect
         if (user.getStatusEffect(genderEffect) != null) {
             // if status they already have has greater duration, then what they have is better
