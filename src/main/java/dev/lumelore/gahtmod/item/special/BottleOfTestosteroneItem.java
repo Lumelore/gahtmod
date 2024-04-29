@@ -1,7 +1,12 @@
 package dev.lumelore.gahtmod.item.special;
 
+import dev.lumelore.gahtmod.effect.ModEffects;
 import net.minecraft.advancement.criterion.Criteria;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffectUtil;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -10,8 +15,12 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.text.Text;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class BottleOfTestosteroneItem extends Item {
 
@@ -60,5 +69,16 @@ public class BottleOfTestosteroneItem extends Item {
         return SoundEvents.ITEM_HONEY_BOTTLE_DRINK;
     }
 
-
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.translatable(ModEffects.BOY_POWER.getTranslationKey()).formatted(ModEffects.BOY_POWER.getCategory().getFormatting())
+                .append(" (")
+                .append(StatusEffectUtil.getDurationText(new StatusEffectInstance(ModEffects.BOY_POWER, 28800), 1f, world == null ? 20.0f : world.getTickManager().getTickRate()))
+                .append(")"));
+        tooltip.add(Text.translatable(StatusEffects.STRENGTH.getTranslationKey()).formatted(StatusEffects.STRENGTH.getCategory().getFormatting())
+                .append(" II (")
+                .append(StatusEffectUtil.getDurationText(new StatusEffectInstance(StatusEffects.STRENGTH, 2400), 1f, world == null ? 20.0f : world.getTickManager().getTickRate()))
+                .append(")"));
+        super.appendTooltip(stack, world, tooltip, context);
+    }
 }

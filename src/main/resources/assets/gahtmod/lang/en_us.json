@@ -24,6 +24,12 @@
 
   "sounds.gahtmod.reverse_drinking": "Reversed sipping",
   "sounds.gahtmod.dash": "Dash whoosh",
-  "sounds.gahtmod.dash_recharge": "Dash recharged"
+  "sounds.gahtmod.dash_recharge": "Dash recharged",
+
+
+  "tooltip.gahtmod.blocker_item": "Removes effects: ",
+  "tooltip.gahtmod.bottle_of_agender": "Removes genders",
+  "tooltip.gahtmod.bottle_of_genderfluid1": "Applies or removes random genders",
+  "tooltip.gahtmod.possible_effects": "Possible effects: "
 
 }

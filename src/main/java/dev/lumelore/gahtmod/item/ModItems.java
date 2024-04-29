@@ -14,11 +14,11 @@ public abstract class ModItems {
     public static final Item GAHT_ICON = registerItem("gaht_icon", new Item(new FabricItemSettings().maxCount(0)));
 
     // Estrogen Items
-    public static final Item ESTROGEN_PILL = registerItem("estrogen_pill", new Item(new FabricItemSettings().food(ModFoodComponents.ESTROGEN_ITEM)));
+    public static final Item ESTROGEN_PILL = registerItem("estrogen_pill", new EstrogenPillItem(new FabricItemSettings().food(ModFoodComponents.ESTROGEN_ITEM)));
     public static final Item TESTOSTERONE_BLOCKER = registerItem("testosterone_blocker", new TestosteroneBlockerItem(new FabricItemSettings().food(ModFoodComponents.NONE_EFFECT_ITEM)));
-    public static final Item PROGESTERONE_CAPSULE = registerItem("progesterone_capsule", new TestosteroneBlockerItem(new FabricItemSettings().food(ModFoodComponents.ESTROGEN_ITEM)));
+    public static final Item PROGESTERONE_CAPSULE = registerItem("progesterone_capsule", new ProgesteroneCapsuleItem(new FabricItemSettings().food(ModFoodComponents.ESTROGEN_ITEM)));
     // Testosterone Items
-    public static final Item TESTOSTERONE_GEL_CAPSULE = registerItem("testosterone_gel_capsule", new Item(new FabricItemSettings().food(ModFoodComponents.TESTOSTERONE_ITEM)));
+    public static final Item TESTOSTERONE_GEL_CAPSULE = registerItem("testosterone_gel_capsule", new TestosteroneGelCapsuleItem(new FabricItemSettings().food(ModFoodComponents.TESTOSTERONE_ITEM)));
     public static final Item ESTROGEN_BLOCKER = registerItem("estrogen_blocker", new EstrogenBlockerItem(new FabricItemSettings().food(ModFoodComponents.NONE_EFFECT_ITEM)));
     // Enby Items
     public static final Item ENBY_JUICE = registerItem("enby_juice", new EnbyJuiceItem(new FabricItemSettings().food(ModFoodComponents.ENBY_ITEM)));

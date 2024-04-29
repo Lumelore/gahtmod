@@ -2,7 +2,10 @@ package dev.lumelore.gahtmod.item.special;
 
 import dev.lumelore.gahtmod.effect.ModEffects;
 import net.minecraft.advancement.criterion.Criteria;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffectUtil;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -11,10 +14,15 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class TestosteroneBlockerItem extends Item {
 
@@ -41,4 +49,13 @@ public class TestosteroneBlockerItem extends Item {
         return stack;
     }
 
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.translatable("tooltip.gahtmod.blocker_item").formatted(Formatting.DARK_PURPLE));
+        tooltip.add(Text.translatable(ModEffects.BOY_POWER.getTranslationKey()).formatted(ModEffects.BOY_POWER.getCategory().getFormatting()));
+        tooltip.add(Text.translatable(StatusEffects.SLOWNESS.getTranslationKey()).formatted(StatusEffects.SLOWNESS.getCategory().getFormatting()));
+        tooltip.add(Text.translatable(StatusEffects.WEAKNESS.getTranslationKey()).formatted(StatusEffects.WEAKNESS.getCategory().getFormatting()));
+        tooltip.add(Text.translatable(StatusEffects.WITHER.getTranslationKey()).formatted(StatusEffects.WITHER.getCategory().getFormatting()));
+        super.appendTooltip(stack, world, tooltip, context);
+    }
 }

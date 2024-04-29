@@ -4,6 +4,7 @@ import dev.lumelore.gahtmod.effect.ModEffects;
 import dev.lumelore.gahtmod.item.ModItems;
 import dev.lumelore.gahtmod.sound.ModSounds;
 import net.minecraft.advancement.criterion.Criteria;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -13,10 +14,15 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.stat.Stats;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class BottleOfAgenderItem extends Item {
 
@@ -104,4 +110,9 @@ public class BottleOfAgenderItem extends Item {
         return ModSounds.REVERSE_DRINKING;
     }
 
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.translatable("tooltip.gahtmod.bottle_of_agender").formatted(Formatting.GRAY));
+        super.appendTooltip(stack, world, tooltip, context);
+    }
 }
