@@ -2,7 +2,6 @@ package dev.lumelore.gahtmod.effect;
 
 import dev.lumelore.gahtmod.GAHTMod;
 import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
