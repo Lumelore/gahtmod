@@ -24,11 +24,11 @@ public class EnbyPowerEffect extends StatusEffect {
     @Override
     public void applyUpdateEffect(LivingEntity entity, int amplifier) {
         if (entity instanceof PlayerEntity) {
-            if (entity.horizontalCollision && canClimb((PlayerEntity) entity)) {
+            if (entity.horizontalCollision && canClimb((PlayerEntity) entity) && !((PlayerEntity) entity).getAbilities().flying) {
                 entity.setVelocity(entity.getVelocity().getX(), 0.2, entity.getVelocity().getZ());
 
             }
-            else if (canClimb((PlayerEntity) entity) && entity.isSneaking()) {
+            else if (canClimb((PlayerEntity) entity) && entity.isSneaking() && !((PlayerEntity) entity).getAbilities().flying ) {
                 entity.setVelocity(entity.getVelocity().getX(), 0, entity.getVelocity().getZ());
             }
         }

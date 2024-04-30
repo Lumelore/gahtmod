@@ -39,7 +39,7 @@ public class GirlPowerEffect extends StatusEffect {
             // Haven't just recently jumped (getJumpingCooldown)
             // Are pressing the jump key (getJumping)
             // Both dashCooldowns are zero
-            if (!entity.isOnGround() && ((PlayerEntityAccessor) entity).getJumpingCooldown() < 5 && ((PlayerEntityAccessor) entity).getJumping()
+            if (!entity.isOnGround() && !((PlayerEntity) entity).getAbilities().flying && ((PlayerEntityAccessor) entity).getJumpingCooldown() < 5 && ((PlayerEntityAccessor) entity).getJumping()
                     && dashCooldownData.getInt("dashCooldown") == 0 && dashCooldownData.getInt("absoluteDashCooldown") == 0) {
                 // Add to their velocity and reset the cooldown
                 ((PlayerEntity) entity).addVelocity(entity.getRotationVector().multiply((amplifier + 1) * 0.8));
