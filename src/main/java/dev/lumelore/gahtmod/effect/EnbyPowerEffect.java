@@ -24,11 +24,14 @@ public class EnbyPowerEffect extends StatusEffect {
     @Override
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         if (entity instanceof PlayerEntity) {
-            if (entity.horizontalCollision && canClimb((PlayerEntity) entity)) {
+            // Apply effect if player is walking into a block that they can climb
+            // and also isn't in creative mode
+            if (entity.horizontalCollision && canClimb((PlayerEntity) entity) && !((PlayerEntity) entity).getAbilities().flying) {
                 entity.setVelocity(entity.getVelocity().getX(), 0.2, entity.getVelocity().getZ());
 
             }
-            else if (canClimb((PlayerEntity) entity) && entity.isSneaking()) {
+            // Hold entity in place vertically if sneaking while climbing
+            else if (canClimb((PlayerEntity) entity) && entity.isSneaking() && !((PlayerEntity) entity).getAbilities().flying) {
                 entity.setVelocity(entity.getVelocity().getX(), 0, entity.getVelocity().getZ());
             }
         }

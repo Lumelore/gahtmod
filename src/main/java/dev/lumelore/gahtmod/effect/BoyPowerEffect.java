@@ -30,17 +30,19 @@ public class BoyPowerEffect extends StatusEffect {
     @Override
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         // Only apply effect to players
+
         if (entity instanceof PlayerEntity) {
             // Don't apply effect twice if the player also has girl power
-            if (entity.getStatusEffect((RegistryEntry<StatusEffect>) ModEffects.GIRL_POWER) == null) {
+            if (entity.getStatusEffect(ModEffects.GIRL_POWER) == null) {
                 // Nbt stuff storing the mods data
                 NbtCompound dashCooldownData = ((EntityDataSaver) entity).getPersistentData();
                 // Make the Player Dash Only if
                 // They are not on the ground
+                // they are not creative mode flying
                 // Haven't just recently jumped (getJumpingCooldown)
                 // Are pressing the jump key (getJumping)
                 // Both dashCooldowns are zero
-                if (!entity.isOnGround() && ((PlayerEntityAccessor) entity).getJumpingCooldown() < 5 && ((PlayerEntityAccessor) entity).getJumping()
+                if (!entity.isOnGround() && !((PlayerEntity) entity).getAbilities().flying && ((PlayerEntityAccessor) entity).getJumpingCooldown() < 5 && ((PlayerEntityAccessor) entity).getJumping()
                         && dashCooldownData.getInt("dashCooldown") == 0 && dashCooldownData.getInt("absoluteDashCooldown") == 0) {
 
                     // Add to their velocity and reset the cooldown
