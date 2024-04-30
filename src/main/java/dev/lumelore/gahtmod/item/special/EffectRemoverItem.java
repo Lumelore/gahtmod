@@ -42,10 +42,16 @@ public class EffectRemoverItem extends Item {
             PotionContentsComponent potionContentsComponent = (PotionContentsComponent)stack.getOrDefault(DataComponentTypes.POTION_CONTENTS, PotionContentsComponent.DEFAULT);
             potionContentsComponent.forEachEffect( (effect) -> user.removeStatusEffect(effect.getEffectType()) );
         }
-        // Usage stat increase and creative mode player keep item
+        // If user is a player
         if (playerEntity != null) {
+            // Add to usage stats
             playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
-            stack.decrementUnlessCreative(1, playerEntity);
+            // Eat item or deplete item
+            if (stack.contains(DataComponentTypes.FOOD)) {
+                user.eatFood(world, stack);
+            } else {
+                stack.decrementUnlessCreative(1, playerEntity);
+            }
         }
 
         user.emitGameEvent(GameEvent.EAT);

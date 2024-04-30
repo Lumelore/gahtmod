@@ -2,6 +2,7 @@ package dev.lumelore.gahtmod.item.special;
 
 import dev.lumelore.gahtmod.effect.ModEffects;
 import net.minecraft.advancement.criterion.Criteria;
+import net.minecraft.client.item.TooltipType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -20,7 +21,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +35,7 @@ public class BottleOfGenderfluidItem extends Item {
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         super.finishUsing(stack, world, user);
         // Add to item usage statistics
-        if (user instanceof ServerPlayerEntity) {
-            ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity)user;
+        if (user instanceof ServerPlayerEntity serverPlayerEntity) {
             Criteria.CONSUME_ITEM.trigger(serverPlayerEntity, stack);
             serverPlayerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
         }
@@ -44,8 +43,7 @@ public class BottleOfGenderfluidItem extends Item {
         if (stack.isEmpty()) {
             return new ItemStack(Items.GLASS_BOTTLE);
         }
-        if (user instanceof PlayerEntity) {
-            PlayerEntity playerEntity = (PlayerEntity)user;
+        if (user instanceof PlayerEntity playerEntity) {
             if (!playerEntity.getAbilities().creativeMode) {
                 ItemStack itemStack = new ItemStack(Items.GLASS_BOTTLE);
                 if (!playerEntity.getInventory().insertStack(itemStack)) {
@@ -55,10 +53,18 @@ public class BottleOfGenderfluidItem extends Item {
             // Give the following statuses randomly
             if (!world.isClient) {
                 ArrayList<RegistryEntry<StatusEffect>> pool = new ArrayList<>(List.of(ModEffects.GIRL_POWER, ModEffects.BOY_POWER, ModEffects.ENBY_POWER));
+
+                // Before giving statuses, if user has all 3 then remove one randomly
+                if (       user.getStatusEffect(ModEffects.GIRL_POWER) != null
+                        && user.getStatusEffect(ModEffects.BOY_POWER)  != null
+                        && user.getStatusEffect(ModEffects.ENBY_POWER) != null) {
+                    user.removeStatusEffect(pool.get((int) (Math.random() * pool.size())));
+                }
+
                 RegistryEntry<StatusEffect> toApply;
                 boolean goAgain = true;
                 do {
-                    // Decide if should pick another effect
+                    // Decide if to pick another effect
                     goAgain = (int) (Math.random() * 2) == 0;
                     // Pick random effect
                     toApply = pool.remove((int) (Math.random() * pool.size()));
@@ -98,28 +104,13 @@ public class BottleOfGenderfluidItem extends Item {
     public SoundEvent getEatSound() {
         return SoundEvents.ITEM_HONEY_BOTTLE_DRINK;
     }
-    /*
+
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("tooltip.gahtmod.bottle_of_genderfluid1").formatted(Formatting.GRAY));
-        tooltip.add(Text.translatable("tooltip.gahtmod.possible_effects").formatted(Formatting.DARK_PURPLE));
-        // girl power 8 minutes
-        tooltip.add(Text.translatable(ModEffects.GIRL_POWER.getTranslationKey()).formatted(ModEffects.GIRL_POWER.getCategory().getFormatting())
-                .append(" (")
-                .append(StatusEffectUtil.getDurationText(new StatusEffectInstance(ModEffects.GIRL_POWER, 9600), 1f, world == null ? 20.0f : world.getTickManager().getTickRate()))
-                .append(")"));
-        // boy power 8 minutes
-        tooltip.add(Text.translatable(ModEffects.BOY_POWER.getTranslationKey()).formatted(ModEffects.BOY_POWER.getCategory().getFormatting())
-                .append(" (")
-                .append(StatusEffectUtil.getDurationText(new StatusEffectInstance(ModEffects.BOY_POWER, 9600), 1f, world == null ? 20.0f : world.getTickManager().getTickRate()))
-                .append(")"));
-        // enby power 8 minutes
-        tooltip.add(Text.translatable(ModEffects.ENBY_POWER.getTranslationKey()).formatted(ModEffects.ENBY_POWER.getCategory().getFormatting())
-                .append(" (")
-                .append(StatusEffectUtil.getDurationText(new StatusEffectInstance(ModEffects.ENBY_POWER, 9600), 1f, world == null ? 20.0f : world.getTickManager().getTickRate()))
-                .append(")"));
-        super.appendTooltip(stack, world, tooltip, context);
-    }*/
+    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+        tooltip.add(Text.translatable("tooltip.gahtmod.bottle_of_genderfluid.line1").formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable("tooltip.gahtmod.bottle_of_genderfluid.line2").formatted(Formatting.GRAY));
+    }
+
 
     private void giveGenderEffect(PlayerEntity user, RegistryEntry<StatusEffect> genderEffect) {
         user.addStatusEffect(new StatusEffectInstance(genderEffect, 9600, 0));

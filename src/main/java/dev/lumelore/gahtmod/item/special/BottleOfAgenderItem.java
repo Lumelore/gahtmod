@@ -5,10 +5,15 @@ import dev.lumelore.gahtmod.item.ModItems;
 import dev.lumelore.gahtmod.sound.ModSounds;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.client.item.TooltipType;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -22,25 +27,26 @@ import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class BottleOfAgenderItem extends Item {
 
     public BottleOfAgenderItem(Settings settings) {
-        super(settings);
+        super(settings.maxCount(1));
     }
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         super.finishUsing(stack, world, user);
         // Add to item usage statistics
-        if (user instanceof ServerPlayerEntity) {
-            ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity)user;
+        if (user instanceof ServerPlayerEntity serverPlayerEntity) {
             Criteria.CONSUME_ITEM.trigger(serverPlayerEntity, stack);
             serverPlayerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
         }
 
-        if (user instanceof PlayerEntity) {
+        if (user instanceof PlayerEntity playerEntity) {
             // Give the player a gender bottle when they are done drinking it
             // if they have genders to remove
             if (   user.getStatusEffect(ModEffects.GIRL_POWER) != null
@@ -48,7 +54,6 @@ public class BottleOfAgenderItem extends Item {
                 || user.getStatusEffect(ModEffects.ENBY_POWER) != null) {
 
                 // Putting statuses into bottle of gender item
-                PlayerEntity playerEntity = (PlayerEntity) user;
                 ItemStack itemStack = new ItemStack(ModItems.BOTTLE_OF_GENDER);
                 loadDataIntoItem(playerEntity, itemStack);
 
@@ -58,7 +63,9 @@ public class BottleOfAgenderItem extends Item {
                     user.removeStatusEffect(ModEffects.GIRL_POWER);
                     user.removeStatusEffect(ModEffects.ENBY_POWER);
                 }
-                // Put the new item in the players hand if they used their last bottle of agender
+                // Deplete stack by 1
+                stack.decrement(1);
+                // Put the new item in the players hand if they used their last bottle of agender (they most likely did)
                 if (stack.isEmpty()) {
                     return itemStack;
                 }
@@ -73,30 +80,39 @@ public class BottleOfAgenderItem extends Item {
     }
 
     private void loadDataIntoItem(PlayerEntity player, ItemStack stack) {
-        // Each pair of zeros is for duration and amplifier
-        // Pairs in order are for, girl power, boy power, and enby power
-        int[] tempArr = {0,0, 0,0, 0,0};
-        // If the player has girl power store in array
-        if (player.getStatusEffect(ModEffects.GIRL_POWER) != null) {
-            tempArr[0] = player.getStatusEffect(ModEffects.GIRL_POWER).getDuration();
-            tempArr[1] = player.getStatusEffect(ModEffects.GIRL_POWER).getAmplifier();
+        ArrayList<StatusEffectInstance> potionList = new ArrayList<>(3);
+        // Put girl power into list if player has it
+        if (player.getStatusEffect(ModEffects.GIRL_POWER) != null
+                && player.getStatusEffect(ModEffects.GIRL_POWER).getDuration() > 20) {
+            potionList.add(new StatusEffectInstance(ModEffects.GIRL_POWER,
+                    player.getStatusEffect(ModEffects.GIRL_POWER).getDuration(),
+                    player.getStatusEffect(ModEffects.GIRL_POWER).getAmplifier()));
         }
-        // If the player has boy power store in array
-        if (player.getStatusEffect(ModEffects.BOY_POWER) != null) {
-            tempArr[2] = player.getStatusEffect(ModEffects.BOY_POWER).getDuration();
-            tempArr[3] = player.getStatusEffect(ModEffects.BOY_POWER).getAmplifier();
+        // Put boy power into list if player has it
+        if (player.getStatusEffect(ModEffects.BOY_POWER) != null
+                && player.getStatusEffect(ModEffects.BOY_POWER).getDuration() > 20) {
+            potionList.add(new StatusEffectInstance(ModEffects.BOY_POWER,
+                    player.getStatusEffect(ModEffects.BOY_POWER).getDuration(),
+                    player.getStatusEffect(ModEffects.BOY_POWER).getAmplifier()));
         }
-        // If the player has enby power store in array
-        if (player.getStatusEffect(ModEffects.ENBY_POWER) != null) {
-            tempArr[4] = player.getStatusEffect(ModEffects.ENBY_POWER).getDuration();
-            tempArr[5] = player.getStatusEffect(ModEffects.ENBY_POWER).getAmplifier();
+        // Put enby power into list if player has it
+        if (player.getStatusEffect(ModEffects.ENBY_POWER) != null
+                && player.getStatusEffect(ModEffects.ENBY_POWER).getDuration() > 20) {
+            potionList.add(new StatusEffectInstance(ModEffects.ENBY_POWER,
+                    player.getStatusEffect(ModEffects.ENBY_POWER).getDuration(),
+                    player.getStatusEffect(ModEffects.ENBY_POWER).getAmplifier()));
         }
-        // TODO: FIX CUSTOM DATA ON ITEM
-        /*
-        stack.set(new DataComponen);
-        stack.getNbt().putIntArray("gahtmod.stored_gender", tempArr);
-        */
+        stack.set(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Optional.empty(), Optional.empty(), potionList));
+    }
 
+    @Override
+    public int getMaxUseTime(ItemStack stack) {
+        return 32;
+    }
+
+    @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        return ItemUsage.consumeHeldItem(world, user, hand);
     }
 
     @Override

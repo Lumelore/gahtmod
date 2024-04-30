@@ -23,9 +23,6 @@ public class ThickPotionItem extends PotionItem {
         super(settings);
     }
 
-    // PotionItem's finishUsing method assumes a max stack size of 1, so there isn't any code
-    // there to drop the returned item on the ground if inventory is full, so that was added
-    // otherwise this method does the same stuff
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         PlayerEntity playerEntity = user instanceof PlayerEntity ? (PlayerEntity)user : null;
@@ -44,10 +41,16 @@ public class ThickPotionItem extends PotionItem {
 
             });
         }
-        // Add to usage stats and also makes it so item isn't depleted in creative mode
+        // If user is a player
         if (playerEntity != null) {
+            // Add to usage stats
             playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
-            stack.decrementUnlessCreative(1, playerEntity);
+            // Eat item or deplete item
+            if (stack.contains(DataComponentTypes.FOOD)) {
+                user.eatFood(world, stack);
+            } else {
+                stack.decrementUnlessCreative(1, playerEntity);
+            }
         }
         // Give back 1 glass bottle
         if (playerEntity == null || !playerEntity.isInCreativeMode()) {

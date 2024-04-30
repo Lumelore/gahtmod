@@ -43,10 +43,16 @@ public class BigThickPotionItem extends PotionItem {
 
             });
         }
-        // Add to usage stats and also makes it so item isn't depleted in creative mode
+        // If user is a player
         if (playerEntity != null) {
+            // Add to usage stats
             playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
-            stack.decrementUnlessCreative(1, playerEntity);
+            // Eat item or deplete item
+            if (stack.contains(DataComponentTypes.FOOD)) {
+                user.eatFood(world, stack);
+            } else {
+                stack.decrementUnlessCreative(1, playerEntity);
+            }
         }
         // Give back 3 glass bottles
         if (playerEntity == null || !playerEntity.isInCreativeMode()) {

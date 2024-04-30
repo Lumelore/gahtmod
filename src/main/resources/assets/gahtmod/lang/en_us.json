@@ -29,7 +29,7 @@
 
   "tooltip.gahtmod.removes_effects": "Removes effects: ",
   "tooltip.gahtmod.bottle_of_agender": "Removes genders",
-  "tooltip.gahtmod.bottle_of_genderfluid1": "Applies or removes random genders",
-  "tooltip.gahtmod.possible_effects": "Possible effects: "
+  "tooltip.gahtmod.bottle_of_genderfluid.line1": "Randomly gives, changes",
+  "tooltip.gahtmod.bottle_of_genderfluid.line2": "or removes genders"
 
 }
