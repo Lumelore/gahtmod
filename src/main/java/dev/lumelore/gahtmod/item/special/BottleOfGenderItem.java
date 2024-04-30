@@ -106,9 +106,7 @@ public class BottleOfGenderItem extends Item {
     }
 
     private void applyEffects(PlayerEntity player, ItemStack itemStack) {
-        System.out.println("Here1");
         if (itemStack.hasNbt()) {
-            System.out.println("Here2");
             int[] effects = itemStack.getNbt().getIntArray("gahtmod.stored_gender");
             //Apply girl power
             if (effects[0] > 0) {
