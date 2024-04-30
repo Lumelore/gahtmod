@@ -13,7 +13,7 @@
     {"item": "minecraft:potion"}
   ],
   "result": {
-    "item": "gahtmod:bottle_of_genderfluid",
+    "id": "gahtmod:bottle_of_genderfluid",
     "count": 5
   }
 }

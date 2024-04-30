@@ -6,7 +6,7 @@
     {"item": "gahtmod:large_enby_juice"}
   ],
   "result": {
-    "item": "gahtmod:enby_juice",
+    "id": "gahtmod:enby_juice",
     "count": 3
   }
 }

@@ -7,7 +7,7 @@
     {"item": "minecraft:popped_chorus_fruit"}
   ],
   "result": {
-    "item": "gahtmod:progesterone_capsule",
+    "id": "gahtmod:progesterone_capsule",
     "count": 1
   }
 }

@@ -6,7 +6,7 @@
     {"item": "gahtmod:bottle_of_gender"}
   ],
   "result": {
-    "item": "minecraft:glass_bottle",
+    "id": "minecraft:glass_bottle",
     "count": 2
   }
 }

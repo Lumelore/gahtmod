@@ -8,7 +8,7 @@
     {"item": "minecraft:potion"}
   ],
   "result": {
-    "item": "gahtmod:bottle_of_testosterone",
+    "id": "gahtmod:bottle_of_testosterone",
     "count": 1
   }
 }

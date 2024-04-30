@@ -7,7 +7,7 @@
     {"item": "minecraft:orange_dye"}
   ],
   "result": {
-    "item": "gahtmod:testosterone_gel_capsule",
+    "id": "gahtmod:testosterone_gel_capsule",
     "count": 1
   }
 }

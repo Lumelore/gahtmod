@@ -7,7 +7,7 @@
     {"item": "minecraft:white_dye"}
   ],
   "result": {
-    "item": "gahtmod:testosterone_blocker",
+    "id": "gahtmod:testosterone_blocker",
     "count": 1
   }
 }

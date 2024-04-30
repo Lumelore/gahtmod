@@ -7,7 +7,7 @@
     {"item": "minecraft:red_dye"}
   ],
   "result": {
-    "item": "gahtmod:estrogen_blocker",
+    "id": "gahtmod:estrogen_blocker",
     "count": 1
   }
 }

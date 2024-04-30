@@ -7,7 +7,7 @@
     {"item": "gahtmod:enby_juice"}
   ],
   "result": {
-    "item": "gahtmod:large_enby_juice",
+    "id": "gahtmod:large_enby_juice",
     "count": 1
   }
 }
