@@ -18,7 +18,7 @@ public class ModFoodComponents {
 
     // used for prog capsule
     public static final FoodComponent ESTROGEN_ITEM = (new FoodComponent.Builder()).alwaysEdible()
-            .statusEffect(new StatusEffectInstance(ModEffects.GIRL_POWER, 9600, 0), 1f)
+            .statusEffect(new StatusEffectInstance(ModEffects.GIRL_POWER, 4800, 0), 1f)
             .statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 1200, 0), 1f).build();
 
     public static final FoodComponent BIG_HONEY = new FoodComponent.Builder().alwaysEdible().nutrition(12).saturationModifier(0.6f).build();

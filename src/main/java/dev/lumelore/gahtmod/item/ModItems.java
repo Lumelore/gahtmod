@@ -29,12 +29,12 @@ public abstract class ModItems {
 
     public static final Item ESTROGEN_PILL = registerItem("estrogen_pill", new CrunchyPotionItem(new Item.Settings()
             .component(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Optional.empty(), Optional.empty(),
-            List.of(new StatusEffectInstance(ModEffects.GIRL_POWER, 9600, 0),
+            List.of(new StatusEffectInstance(ModEffects.GIRL_POWER, 4800, 0),
                     new StatusEffectInstance(StatusEffects.REGENERATION, 1200, 0))))));
 
     public static final Item BOTTLE_OF_ESTROGEN = registerItem("bottle_of_estrogen", new ThickPotionItem(new Item.Settings()
             .component(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Optional.empty(), Optional.empty(),
-                    List.of(new StatusEffectInstance(ModEffects.GIRL_POWER, 28800, 0),
+                    List.of(new StatusEffectInstance(ModEffects.GIRL_POWER, 18000, 0),
                             new StatusEffectInstance(StatusEffects.REGENERATION, 2400, 1))))));
 
     public static final Item TESTOSTERONE_BLOCKER = registerItem("testosterone_blocker", new EffectRemoverItem(new Item.Settings()
@@ -58,12 +58,12 @@ public abstract class ModItems {
 
     public static final Item TESTOSTERONE_GEL_CAPSULE = registerItem("testosterone_gel_capsule", new CrunchyPotionItem(new Item.Settings()
             .component(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Optional.empty(), Optional.empty(),
-                    List.of(new StatusEffectInstance(ModEffects.BOY_POWER, 9600, 0),
+                    List.of(new StatusEffectInstance(ModEffects.BOY_POWER, 4800, 0),
                             new StatusEffectInstance(StatusEffects.STRENGTH, 1200, 0))))));
 
     public static final Item BOTTLE_OF_TESTOSTERONE = registerItem("bottle_of_testosterone", new ThickPotionItem(new Item.Settings()
             .component(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Optional.empty(), Optional.empty(),
-                    List.of(new StatusEffectInstance(ModEffects.BOY_POWER, 28800, 0),
+                    List.of(new StatusEffectInstance(ModEffects.BOY_POWER, 18000, 0),
                             new StatusEffectInstance(StatusEffects.STRENGTH, 2400, 1))))));
 
     public static final Item ESTROGEN_BLOCKER = registerItem("estrogen_blocker", new EffectRemoverItem(new Item.Settings()
@@ -80,13 +80,13 @@ public abstract class ModItems {
     public static final Item ENBY_JUICE = registerItem("enby_juice", new ThickPotionItem(new Item.Settings()
             .food(FoodComponents.HONEY_BOTTLE)
             .component(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Optional.empty(), Optional.empty(),
-                    List.of(new StatusEffectInstance(ModEffects.ENBY_POWER, 9600, 0),
+                    List.of(new StatusEffectInstance(ModEffects.ENBY_POWER, 4800, 0),
                             new StatusEffectInstance(StatusEffects.RESISTANCE, 1200, 0))))));
 
     public static final Item LARGE_ENBY_JUICE = registerItem("large_enby_juice", new BigThickPotionItem(new Item.Settings()
             .component(DataComponentTypes.FOOD, ModFoodComponents.BIG_HONEY)
             .component(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Optional.empty(), Optional.empty(),
-                    List.of(new StatusEffectInstance(ModEffects.ENBY_POWER, 28800, 0),
+                    List.of(new StatusEffectInstance(ModEffects.ENBY_POWER, 18000, 0),
                             new StatusEffectInstance(StatusEffects.RESISTANCE, 2400, 1))))));
 
     // bottle of genderfluid, agender, + gender Items

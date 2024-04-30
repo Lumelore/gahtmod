@@ -6,7 +6,6 @@ import net.minecraft.client.item.TooltipType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffectUtil;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -113,7 +112,7 @@ public class BottleOfGenderfluidItem extends Item {
 
 
     private void giveGenderEffect(PlayerEntity user, RegistryEntry<StatusEffect> genderEffect) {
-        user.addStatusEffect(new StatusEffectInstance(genderEffect, 9600, 0));
+        user.addStatusEffect(new StatusEffectInstance(genderEffect, 4800, 0));
         if (genderEffect == ModEffects.GIRL_POWER) {
             user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 600, 0));
         }
@@ -129,7 +128,7 @@ public class BottleOfGenderfluidItem extends Item {
         // if user has status effect
         if (user.getStatusEffect(genderEffect) != null) {
             // if status they already have has greater duration, then what they have is better
-            if (user.getStatusEffect(genderEffect).getDuration() > 9600) {
+            if (user.getStatusEffect(genderEffect).getDuration() > 4800) {
                 return false;
             }
             // this effect is better otherwise

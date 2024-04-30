@@ -79,7 +79,6 @@ public class BoyPowerEffect extends StatusEffect {
     }
 
     private void spawnParticleIfDashed(PlayerEntity player, NbtCompound dashCooldownData) {
-
         if (dashCooldownData.getInt("dashCooldown") > 45) {
             player.getWorld().addParticle(ParticleTypes.CLOUD,
                     player.getX(), player.getY() + 0.2, player.getZ(),
