@@ -90,7 +90,7 @@ public abstract class ModItems {
                             new StatusEffectInstance(StatusEffects.RESISTANCE, 2400, 1))))));
 
     // bottle of genderfluid, agender, + gender Items
-    public static final Item BOTTLE_OF_GENDERFLUID = registerItem("bottle_of_genderfluid", new BottleOfGenderfluidItem(new Item.Settings().food(ModFoodComponents.NONE_EFFECT_ITEM)));
+    public static final Item BOTTLE_OF_GENDERFLUID = registerItem("bottle_of_genderfluid", new BottleOfGenderfluidItem(new Item.Settings()));
     public static final Item BOTTLE_OF_AGENDER = registerItem("bottle_of_agender", new BottleOfAgenderItem(new Item.Settings()));
     public static final Item BOTTLE_OF_GENDER = registerItem("bottle_of_gender", new BottleOfGenderItem(new Item.Settings()));
 

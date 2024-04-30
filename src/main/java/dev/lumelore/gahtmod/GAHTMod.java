@@ -18,8 +18,6 @@ public class GAHTMod implements ModInitializer {
 	@Override
 	public void onInitialize() {
 
-
-
 		// Registers for items and groups
 		ModItems.registerModItems();
 		ModItemGroups.registerItemGroups();
@@ -27,8 +25,6 @@ public class GAHTMod implements ModInitializer {
 		ModEffects.registerModEffects();
 		// Registers for sounds
 		ModSounds.registerSounds();
-
-
 
 	}
 }
