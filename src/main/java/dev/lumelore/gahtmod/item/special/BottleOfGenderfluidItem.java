@@ -52,17 +52,6 @@ public class BottleOfGenderfluidItem extends Item {
             } else {
                 stack.decrementUnlessCreative(1, playerEntity);
             }
-        }
-        // Give back 1 glass bottle
-        if (playerEntity == null || !playerEntity.isInCreativeMode()) {
-            ItemStack bottleStack = new ItemStack(Items.GLASS_BOTTLE);
-            if (stack.isEmpty()) {
-                return bottleStack;
-            }
-            // Drop the bottle on the ground if it can't go into the inventory
-            if (playerEntity != null && !playerEntity.getInventory().insertStack(bottleStack)) {
-                playerEntity.dropItem(bottleStack, false);
-            }
 
             // Give the following statuses randomly
             if (!world.isClient) {
@@ -99,6 +88,18 @@ public class BottleOfGenderfluidItem extends Item {
                         user.removeStatusEffect(toRemove);
                     }
                 } while (!pool.isEmpty() && goAgain);
+            }
+        }
+
+        // Give back 1 glass bottle
+        if (playerEntity == null || !playerEntity.isInCreativeMode()) {
+            ItemStack bottleStack = new ItemStack(Items.GLASS_BOTTLE);
+            if (stack.isEmpty()) {
+                return bottleStack;
+            }
+            // Drop the bottle on the ground if it can't go into the inventory
+            if (playerEntity != null && !playerEntity.getInventory().insertStack(bottleStack)) {
+                playerEntity.dropItem(bottleStack, false);
             }
         }
         return stack;
