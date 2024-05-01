@@ -3,6 +3,7 @@ package dev.lumelore.gahtmod.item.special;
 import dev.lumelore.gahtmod.effect.ModEffects;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.client.item.TooltipType;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -35,23 +36,34 @@ public class BottleOfGenderfluidItem extends Item {
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        super.finishUsing(stack, world, user);
+        PlayerEntity playerEntity = user instanceof PlayerEntity ? (PlayerEntity)user : null;
         // Add to item usage statistics
         if (user instanceof ServerPlayerEntity serverPlayerEntity) {
             Criteria.CONSUME_ITEM.trigger(serverPlayerEntity, stack);
             serverPlayerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
         }
-        // Give the player a glass bottle when they are done drinking it
-        if (stack.isEmpty()) {
-            return new ItemStack(Items.GLASS_BOTTLE);
-        }
-        if (user instanceof PlayerEntity playerEntity) {
-            if (!playerEntity.getAbilities().creativeMode) {
-                ItemStack itemStack = new ItemStack(Items.GLASS_BOTTLE);
-                if (!playerEntity.getInventory().insertStack(itemStack)) {
-                    playerEntity.dropItem(itemStack, false);
-                }
+        // If user is a player
+        if (playerEntity != null) {
+            // Add to usage stats
+            playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
+            // Eat item or deplete item
+            if (stack.contains(DataComponentTypes.FOOD)) {
+                user.eatFood(world, stack);
+            } else {
+                stack.decrementUnlessCreative(1, playerEntity);
             }
+        }
+        // Give back 1 glass bottle
+        if (playerEntity == null || !playerEntity.isInCreativeMode()) {
+            ItemStack bottleStack = new ItemStack(Items.GLASS_BOTTLE);
+            if (stack.isEmpty()) {
+                return bottleStack;
+            }
+            // Drop the bottle on the ground if it can't go into the inventory
+            if (playerEntity != null && !playerEntity.getInventory().insertStack(bottleStack)) {
+                playerEntity.dropItem(bottleStack, false);
+            }
+
             // Give the following statuses randomly
             if (!world.isClient) {
                 ArrayList<RegistryEntry<StatusEffect>> pool = new ArrayList<>(List.of(ModEffects.GIRL_POWER, ModEffects.BOY_POWER, ModEffects.ENBY_POWER));
