@@ -48,7 +48,7 @@ public class CrunchyPotionItem extends PotionItem {
             playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
             // Eat item or deplete item
             if (stack.contains(DataComponentTypes.FOOD)) {
-                user.eatFood(world, stack);
+                user.eatFood(world, stack, stack.get(DataComponentTypes.FOOD));
             } else {
                 stack.decrementUnlessCreative(1, playerEntity);
             }

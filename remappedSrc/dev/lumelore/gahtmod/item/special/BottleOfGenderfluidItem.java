@@ -2,7 +2,6 @@ package dev.lumelore.gahtmod.item.special;
 
 import dev.lumelore.gahtmod.effect.ModEffects;
 import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
@@ -13,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
@@ -30,7 +30,7 @@ import java.util.List;
 
 public class BottleOfGenderfluidItem extends Item {
 
-    public BottleOfGenderfluidItem(Settings settings) {
+    public BottleOfGenderfluidItem(net.minecraft.item.Item.Settings settings) {
         super(settings);
     }
 
@@ -48,7 +48,7 @@ public class BottleOfGenderfluidItem extends Item {
             playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
             // Eat item or deplete item
             if (stack.contains(DataComponentTypes.FOOD)) {
-                user.eatFood(world, stack, stack.get(DataComponentTypes.FOOD));
+                user.eatFood(world, stack);
             } else {
                 stack.decrementUnlessCreative(1, playerEntity);
             }
@@ -106,7 +106,7 @@ public class BottleOfGenderfluidItem extends Item {
     }
 
     @Override
-    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
+    public int getMaxUseTime(ItemStack stack) {
         return 32;
     }
 

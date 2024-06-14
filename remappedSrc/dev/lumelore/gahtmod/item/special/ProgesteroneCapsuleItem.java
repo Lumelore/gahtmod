@@ -1,18 +1,18 @@
 package dev.lumelore.gahtmod.item.special;
 
 import dev.lumelore.gahtmod.effect.ModEffects;
-import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.text.Text;
 
 import java.util.List;
 
 public class ProgesteroneCapsuleItem extends EffectRemoverItem {
 
-    public ProgesteroneCapsuleItem(Settings settings) {
+    public ProgesteroneCapsuleItem(net.minecraft.item.Item.Settings settings) {
         super(settings);
     }
 

@@ -7,7 +7,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.item.PotionItem;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
@@ -17,12 +16,14 @@ import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
-public class ThickPotionItem extends PotionItem {
+public class CrunchyPotionItem extends PotionItem {
 
-    public ThickPotionItem(Settings settings) {
+    public CrunchyPotionItem(net.minecraft.item.Item.Settings settings) {
         super(settings);
     }
 
+    // Mostly same as the method in PotionItem class, crunchy potion items don't
+    // give bottles back so had to remove that part
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         PlayerEntity playerEntity = user instanceof PlayerEntity ? (PlayerEntity)user : null;
@@ -47,24 +48,16 @@ public class ThickPotionItem extends PotionItem {
             playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
             // Eat item or deplete item
             if (stack.contains(DataComponentTypes.FOOD)) {
-                user.eatFood(world, stack, stack.get(DataComponentTypes.FOOD));
+                user.eatFood(world, stack);
             } else {
                 stack.decrementUnlessCreative(1, playerEntity);
             }
         }
-        // Give back 1 glass bottle
-        if (playerEntity == null || !playerEntity.isInCreativeMode()) {
-            ItemStack bottleStack = new ItemStack(Items.GLASS_BOTTLE);
-            if (stack.isEmpty()) {
-                return bottleStack;
-            }
-            // Drop the bottle on the ground if it can't go into the inventory
-            if (playerEntity != null && !playerEntity.getInventory().insertStack(bottleStack)) {
-                playerEntity.dropItem(bottleStack, false);
-            }
-        }
 
-        user.emitGameEvent(GameEvent.DRINK);
+        // The part here where a glass bottle is added to inventory was removed.
+        // This item does not give the player anything back.
+
+        user.emitGameEvent(GameEvent.EAT);
         return stack;
     }
 
@@ -75,17 +68,17 @@ public class ThickPotionItem extends PotionItem {
 
     @Override
     public UseAction getUseAction(ItemStack stack) {
-        return UseAction.DRINK;
+        return UseAction.EAT;
     }
 
     @Override
     public SoundEvent getDrinkSound() {
-        return SoundEvents.ITEM_HONEY_BOTTLE_DRINK;
+        return SoundEvents.ENTITY_GENERIC_EAT;
     }
 
     @Override
     public SoundEvent getEatSound() {
-        return SoundEvents.ITEM_HONEY_BOTTLE_DRINK;
+        return SoundEvents.ENTITY_GENERIC_EAT;
     }
 
 }

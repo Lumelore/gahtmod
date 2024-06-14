@@ -17,12 +17,14 @@ import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
-public class ThickPotionItem extends PotionItem {
+public class BigThickPotionItem extends PotionItem {
 
-    public ThickPotionItem(Settings settings) {
+    public BigThickPotionItem(net.minecraft.item.Item.Settings settings) {
         super(settings);
     }
 
+
+    // Give the player back 3 glass bottles instead of just 1
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         PlayerEntity playerEntity = user instanceof PlayerEntity ? (PlayerEntity)user : null;
@@ -47,18 +49,19 @@ public class ThickPotionItem extends PotionItem {
             playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
             // Eat item or deplete item
             if (stack.contains(DataComponentTypes.FOOD)) {
-                user.eatFood(world, stack, stack.get(DataComponentTypes.FOOD));
+                user.eatFood(world, stack);
             } else {
                 stack.decrementUnlessCreative(1, playerEntity);
             }
         }
-        // Give back 1 glass bottle
+        // Give back 3 glass bottles
         if (playerEntity == null || !playerEntity.isInCreativeMode()) {
             ItemStack bottleStack = new ItemStack(Items.GLASS_BOTTLE);
+            bottleStack.setCount(3);
             if (stack.isEmpty()) {
                 return bottleStack;
             }
-            // Drop the bottle on the ground if it can't go into the inventory
+            // Drop the bottles on the ground if it can't go into the inventory
             if (playerEntity != null && !playerEntity.getInventory().insertStack(bottleStack)) {
                 playerEntity.dropItem(bottleStack, false);
             }

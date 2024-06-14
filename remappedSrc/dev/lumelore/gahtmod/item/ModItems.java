@@ -95,11 +95,11 @@ public abstract class ModItems {
     public static final Item BOTTLE_OF_GENDER = registerItem("bottle_of_gender", new BottleOfGenderItem(new Item.Settings()));
 
     private static Item registerItem(String name, Item item) {
-        return Registry.register(Registries.ITEM, Identifier.of(GAHTMod.MOD_ID, name), item);
+        return Registry.register(Registries.ITEM, new Identifier(GAHTMod.MOD_ID, name), item);
     }
 
     private static RegistryEntry<Potion> register(String name, Potion potion) {
-        return Registry.registerReference(Registries.POTION, Identifier.of(GAHTMod.MOD_ID, name), potion);
+        return Registry.registerReference(Registries.POTION, new Identifier(GAHTMod.MOD_ID, name), potion);
     }
 
     public static void registerModItems() {

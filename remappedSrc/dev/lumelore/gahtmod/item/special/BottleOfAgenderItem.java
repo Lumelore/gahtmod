@@ -4,15 +4,18 @@ import dev.lumelore.gahtmod.effect.ModEffects;
 import dev.lumelore.gahtmod.item.ModItems;
 import dev.lumelore.gahtmod.sound.ModSounds;
 import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
+import net.minecraft.item.Items;
+import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.stat.Stats;
@@ -22,6 +25,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +33,7 @@ import java.util.Optional;
 
 public class BottleOfAgenderItem extends Item {
 
-    public BottleOfAgenderItem(Settings settings) {
+    public BottleOfAgenderItem(net.minecraft.item.Item.Settings settings) {
         super(settings.maxCount(1));
     }
 
@@ -102,7 +106,7 @@ public class BottleOfAgenderItem extends Item {
     }
 
     @Override
-    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
+    public int getMaxUseTime(ItemStack stack) {
         return 32;
     }
 

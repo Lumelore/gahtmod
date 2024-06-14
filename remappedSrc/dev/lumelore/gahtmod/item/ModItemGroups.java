@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier;
 
 public abstract class ModItemGroups {
 
-    public static final ItemGroup GAHT_GROUP = Registry.register(Registries.ITEM_GROUP, Identifier.of(GAHTMod.MOD_ID, "gaht_group"),
+    public static final ItemGroup GAHT_GROUP = Registry.register(Registries.ITEM_GROUP, new Identifier(GAHTMod.MOD_ID, "gaht_group"),
             FabricItemGroup.builder()
                     .displayName(Text.translatable("itemgroup.gaht_group"))
                     .icon(() -> new ItemStack(ModItems.GAHT_ICON))

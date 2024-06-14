@@ -19,7 +19,7 @@ import net.minecraft.world.event.GameEvent;
 
 public class ThickPotionItem extends PotionItem {
 
-    public ThickPotionItem(Settings settings) {
+    public ThickPotionItem(net.minecraft.item.Item.Settings settings) {
         super(settings);
     }
 
@@ -47,7 +47,7 @@ public class ThickPotionItem extends PotionItem {
             playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
             // Eat item or deplete item
             if (stack.contains(DataComponentTypes.FOOD)) {
-                user.eatFood(world, stack, stack.get(DataComponentTypes.FOOD));
+                user.eatFood(world, stack);
             } else {
                 stack.decrementUnlessCreative(1, playerEntity);
             }
