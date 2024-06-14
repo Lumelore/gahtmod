@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "gahtmod.estrogen_pill",
+  "ingredients": [
+    {"item": "minecraft:wind_charge"},
+    {"item": "minecraft:wind_charge"},
+    {"item": "minecraft:wind_charge"},
+    {"item": "minecraft:wind_charge"},
+    {"item": "minecraft:sugar"},
+    {"item": "minecraft:light_blue_dye"}
+  ],
+  "result": {
+    "id": "gahtmod:estrogen_pill",
+    "count": 1
+  }
+}

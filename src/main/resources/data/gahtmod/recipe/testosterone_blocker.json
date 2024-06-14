@@ -1,8 +1,9 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
+  "group": "gahtmod.testosterone_blocker",
   "ingredients": [
-    {"item": "minecraft:prismarine_shard"},
+    {"item": "minecraft:breeze_rod"},
     {"item": "minecraft:nether_wart"},
     {"item": "minecraft:white_dye"}
   ],

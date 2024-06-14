@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "gahtmod.testosterone_blocker",
+  "ingredients": [
+    {"item": "minecraft:wind_charge"},
+    {"item": "minecraft:wind_charge"},
+    {"item": "minecraft:wind_charge"},
+    {"item": "minecraft:wind_charge"},
+    {"item": "minecraft:nether_wart"},
+    {"item": "minecraft:white_dye"}
+  ],
+  "result": {
+    "id": "gahtmod:testosterone_blocker",
+    "count": 1
+  }
+}
