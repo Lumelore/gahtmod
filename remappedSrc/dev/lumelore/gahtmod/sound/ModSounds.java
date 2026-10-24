@@ -1,12 +1,12 @@
-package dev.lumelore.gahtmod.sound;
+package net.lumelore.gahtmod.sound;
 
-import dev.lumelore.gahtmod.GAHTMod;
+import net.lumelore.gahtmod.GAHTMod;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 
-import static dev.lumelore.gahtmod.GAHTMod.MOD_ID;
+import static net.lumelore.gahtmod.GAHTMod.MOD_ID;
 
 public abstract class ModSounds {
 

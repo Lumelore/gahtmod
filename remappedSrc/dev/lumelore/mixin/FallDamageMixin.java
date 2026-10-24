@@ -1,6 +1,6 @@
-package dev.lumelore.mixin;
+package net.lumelore.mixin;
 
-import dev.lumelore.gahtmod.effect.ModEffects;
+import net.lumelore.gahtmod.effect.ModEffects;
 import net.minecraft.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

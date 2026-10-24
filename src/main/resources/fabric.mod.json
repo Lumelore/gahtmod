@@ -8,7 +8,7 @@
 		"Lumelore"
 	],
 	"contact": {
-		"homepage": "https://github.com/Lumelore/gahtmod/wiki",
+		"homepage": "https://lumelore.net/mods/mc-gaht-mod/",
 		"sources": "https://github.com/Lumelore/gahtmod"
 	},
 	"license": ["Code: GPL-3.0 license", "Graphical & Audio Assets: CC-BY-SA 4.0"],
@@ -16,10 +16,10 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"dev.lumelore.gahtmod.GAHTMod"
+			"net.lumelore.gahtmod.GAHTMod"
 		],
 		"client": [
-			"dev.lumelore.gahtmodclient.GAHTModClient"
+			"net.lumelore.gahtmodclient.GAHTModClient"
 		]
 	},
 	"mixins": [
@@ -30,8 +30,8 @@
 		}
 	],
 	"depends": {
-		"fabricloader": ">=0.15.11",
-		"minecraft": "~1.21.1",
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.21.4",
 		"java": ">=21",
 		"fabric-api": "*"
 	},

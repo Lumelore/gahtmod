@@ -1,8 +1,8 @@
-package dev.lumelore.gahtmod.item.special;
+package net.lumelore.gahtmod.item.special;
 
 import com.mojang.serialization.MapDecoder;
-import dev.lumelore.gahtmod.effect.ModEffects;
-import dev.lumelore.gahtmod.item.ModItems;
+import net.lumelore.gahtmod.effect.ModEffects;
+import net.lumelore.gahtmod.item.ModItems;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.PotionContentsComponent;

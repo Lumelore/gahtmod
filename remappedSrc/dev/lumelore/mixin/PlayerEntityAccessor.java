@@ -1,4 +1,4 @@
-package dev.lumelore.mixin;
+package net.lumelore.mixin;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.MinecraftServer;

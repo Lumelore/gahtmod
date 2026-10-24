@@ -1,6 +1,6 @@
-package dev.lumelore.gahtmod.effect;
+package net.lumelore.gahtmod.effect;
 
-import dev.lumelore.gahtmod.GAHTMod;
+import net.lumelore.gahtmod.GAHTMod;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffect;
@@ -10,7 +10,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 
-import static dev.lumelore.gahtmod.GAHTMod.MOD_ID;
+import static net.lumelore.gahtmod.GAHTMod.MOD_ID;
 
 public class ModEffects {
     // Registers for effects

@@ -1,8 +1,8 @@
-package dev.lumelore.gahtmod.item;
+package net.lumelore.gahtmod.item;
 
-import dev.lumelore.gahtmod.GAHTMod;
-import dev.lumelore.gahtmod.effect.ModEffects;
-import dev.lumelore.gahtmod.item.special.*;
+import net.lumelore.gahtmod.GAHTMod;
+import net.lumelore.gahtmod.effect.ModEffects;
+import net.lumelore.gahtmod.item.special.*;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.FoodComponents;
 import net.minecraft.component.type.PotionContentsComponent;

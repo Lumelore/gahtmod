@@ -1,4 +1,4 @@
-package dev.lumelore.gahtmod.effect;
+package net.lumelore.gahtmod.effect;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;

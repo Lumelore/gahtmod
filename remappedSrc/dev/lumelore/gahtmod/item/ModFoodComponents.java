@@ -1,6 +1,6 @@
-package dev.lumelore.gahtmod.item;
+package net.lumelore.gahtmod.item;
 
-import dev.lumelore.gahtmod.effect.ModEffects;
+import net.lumelore.gahtmod.effect.ModEffects;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;

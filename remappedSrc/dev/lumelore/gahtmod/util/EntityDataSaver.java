@@ -1,4 +1,4 @@
-package dev.lumelore.gahtmod.util;
+package net.lumelore.gahtmod.util;
 
 import net.minecraft.nbt.NbtCompound;
 

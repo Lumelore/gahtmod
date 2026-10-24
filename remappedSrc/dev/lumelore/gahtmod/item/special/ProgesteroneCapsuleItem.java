@@ -1,6 +1,6 @@
-package dev.lumelore.gahtmod.item.special;
+package net.lumelore.gahtmod.item.special;
 
-import dev.lumelore.gahtmod.effect.ModEffects;
+import net.lumelore.gahtmod.effect.ModEffects;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;

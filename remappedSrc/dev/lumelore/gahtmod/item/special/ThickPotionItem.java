@@ -1,4 +1,4 @@
-package dev.lumelore.gahtmod.item.special;
+package net.lumelore.gahtmod.item.special;
 
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.component.DataComponentTypes;

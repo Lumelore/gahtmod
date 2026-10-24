@@ -1,8 +1,8 @@
-package dev.lumelore.gahtmod.effect;
+package net.lumelore.gahtmod.effect;
 
-import dev.lumelore.gahtmod.sound.ModSounds;
-import dev.lumelore.gahtmod.util.EntityDataSaver;
-import dev.lumelore.mixin.PlayerEntityAccessor;
+import net.lumelore.gahtmod.sound.ModSounds;
+import net.lumelore.gahtmod.util.EntityDataSaver;
+import net.lumelore.mixin.PlayerEntityAccessor;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;

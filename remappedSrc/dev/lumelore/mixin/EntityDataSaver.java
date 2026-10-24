@@ -1,4 +1,4 @@
-package dev.lumelore.mixin;
+package net.lumelore.mixin;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
-public abstract class EntityDataSaver implements dev.lumelore.gahtmod.util.EntityDataSaver {
+public abstract class EntityDataSaver implements net.lumelore.gahtmod.util.EntityDataSaver {
 
     @Unique
     private NbtCompound persistentData;

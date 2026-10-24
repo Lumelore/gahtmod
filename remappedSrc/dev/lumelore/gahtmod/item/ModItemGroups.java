@@ -1,6 +1,6 @@
-package dev.lumelore.gahtmod.item;
+package net.lumelore.gahtmod.item;
 
-import dev.lumelore.gahtmod.GAHTMod;
+import net.lumelore.gahtmod.GAHTMod;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;

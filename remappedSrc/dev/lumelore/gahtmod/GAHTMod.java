@@ -1,9 +1,9 @@
-package dev.lumelore.gahtmod;
+package net.lumelore.gahtmod;
 
-import dev.lumelore.gahtmod.effect.ModEffects;
-import dev.lumelore.gahtmod.item.ModItemGroups;
-import dev.lumelore.gahtmod.item.ModItems;
-import dev.lumelore.gahtmod.sound.ModSounds;
+import net.lumelore.gahtmod.effect.ModEffects;
+import net.lumelore.gahtmod.item.ModItemGroups;
+import net.lumelore.gahtmod.item.ModItems;
+import net.lumelore.gahtmod.sound.ModSounds;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
