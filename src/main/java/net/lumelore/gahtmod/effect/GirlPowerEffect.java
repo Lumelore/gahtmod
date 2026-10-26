@@ -48,7 +48,7 @@ public class GirlPowerEffect extends StatusEffect {
                     && dashCooldownData.getInt("dashCooldown") == 0
                     && dashCooldownData.getInt("absoluteDashCooldown") == 0
             ) {
-                // Add to their velocity and reset the cooldown
+                // Ask the client if the player is jumping, if so the rest is handled in EffectUtil
                 ServerPlayNetworking.send(world.getServer().getPlayerManager().getPlayer(entity.getUuid()),
                         new GAHTPayloads.RequestJumpForBoostPayload((byte) 0));
             }
