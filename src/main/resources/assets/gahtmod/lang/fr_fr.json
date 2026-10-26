@@ -1,0 +1,40 @@
+{
+  "itemgroup.gaht_group": "GAHT Objets",
+  "item.gahtmod.gaht_icon": "Icône de GAHT Mod",
+
+
+  "item.gahtmod.estrogen_pill": "Pilule d'Estrogène",
+  "item.gahtmod.testosterone_blocker": "Anti-Testo",
+  "item.gahtmod.progesterone_capsule": "Capsule de Progestérone",
+  "item.gahtmod.testosterone_gel_capsule": "Testosterone Gel Capsule",
+  "item.gahtmod.estrogen_blocker": "Anti-Estro",
+  "item.gahtmod.enby_juice": "Jus d'Enby",
+  "item.gahtmod.large_enby_juice": "Grand Jus d'Enby",
+  "item.gahtmod.bottle_of_estrogen": "Fiole d'Estrogène",
+  "item.gahtmod.bottle_of_testosterone": "Fiole de Testostérone",
+  "item.gahtmod.bottle_of_genderfluid": "Fiole de Genre Fluide",
+  "item.gahtmod.bottle_of_agender": "Fiole d'Agenre",
+  "item.gahtmod.bottle_of_gender": "Fiole de Genre",
+  "item.gahtmod.bottle_of_oil_solution": "Fiole de Solution Huile",
+
+
+  "effect.gahtmod.girl_power": "Force de Femme",
+  "effect.gahtmod.boy_power": "Force d'Homme",
+  "effect.gahtmod.enby_power": "Force d'Enby",
+
+
+  "sounds.gahtmod.reverse_drinking": "En train de boire à l'envers",
+  "sounds.gahtmod.dash": "Souffle de course",
+  "sounds.gahtmod.dash_recharge": "Course recharger",
+
+
+  "tooltip.gahtmod.removes_effects": "Supprime les effets: ",
+  "tooltip.gahtmod.bottle_of_agender": "Supprime et garde les genres",
+  "tooltip.gahtmod.bottle_of_genderfluid.line1": "Donne, remplace, ou supprime",
+  "tooltip.gahtmod.bottle_of_genderfluid.line2": "les genres au hasard",
+
+  "advancements.gahtmod.maximum_gender.title": "Genre Maximum",
+  "advancements.gahtmod.maximum_gender.description": "Avoir tous les effets de genre simultanément",
+  "advancements.gahtmod.saving_it.title": "Garde ça pour plus tard",
+  "advancements.gahtmod.saving_it.description": "Utilise une fiole d'agenre"
+}

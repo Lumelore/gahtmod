@@ -31,6 +31,10 @@
   "tooltip.gahtmod.removes_effects": "Removes effects: ",
   "tooltip.gahtmod.bottle_of_agender": "Removes and stores genders",
   "tooltip.gahtmod.bottle_of_genderfluid.line1": "Randomly gives, changes",
-  "tooltip.gahtmod.bottle_of_genderfluid.line2": "or removes genders"
+  "tooltip.gahtmod.bottle_of_genderfluid.line2": "or removes genders",
 
+  "advancements.gahtmod.maximum_gender.title": "Maximum Gender",
+  "advancements.gahtmod.maximum_gender.description": "Have every gender effect simultaneously",
+  "advancements.gahtmod.saving_it.title": "Saving It for Later",
+  "advancements.gahtmod.saving_it.description": "Use a Bottle of Agender"
 }
