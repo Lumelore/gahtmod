@@ -1,10 +1,7 @@
 package net.lumelore.gahtmod.item;
 
 import net.lumelore.gahtmod.GAHTMod;
-import net.lumelore.gahtmod.item.special.BottleOfAgenderItem;
-import net.lumelore.gahtmod.item.special.BottleOfGenderItem;
-import net.lumelore.gahtmod.item.special.BottleOfGenderfluidItem;
-import net.lumelore.gahtmod.item.special.TooltippedConsumableItem;
+import net.lumelore.gahtmod.item.special.*;
 import net.minecraft.component.type.FoodComponents;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -25,12 +22,16 @@ public abstract class ModItems {
      * Estrogen Items *
      * ============== */
 
+    public static final Item BOTTLE_OF_OIL_SOLUTION = registerItem("bottle_of_oil_solution", Item::new, new Item.Settings()
+    );
+
     public static final Item ESTROGEN_PILL = registerItem("estrogen_pill", TooltippedConsumableItem::new, new Item.Settings()
             .food(GAHTComponents.ALWAYS_EDIBLE, GAHTComponents.SMALL_CRUNCHY_ESTROGEN_CONSUMABLE)
     );
 
     public static final Item BOTTLE_OF_ESTROGEN = registerItem("bottle_of_estrogen", TooltippedConsumableItem::new, new Item.Settings()
             .food(GAHTComponents.ALWAYS_EDIBLE, GAHTComponents.LARGE_ESTROGEN_CONSUMABLE)
+            .useRemainder(Items.GLASS_BOTTLE)
     );
 
     public static final Item TESTOSTERONE_BLOCKER = registerItem("testosterone_blocker", TooltippedConsumableItem::new, new Item.Settings()
@@ -51,6 +52,7 @@ public abstract class ModItems {
 
     public static final Item BOTTLE_OF_TESTOSTERONE = registerItem("bottle_of_testosterone", TooltippedConsumableItem::new, new Item.Settings()
             .food(GAHTComponents.ALWAYS_EDIBLE, GAHTComponents.LARGE_TESTOSTERONE_CONSUMABLE)
+            .useRemainder(Items.GLASS_BOTTLE)
     );
 
     public static final Item ESTROGEN_BLOCKER = registerItem("estrogen_blocker", TooltippedConsumableItem::new, new Item.Settings()
@@ -65,8 +67,9 @@ public abstract class ModItems {
             .food(FoodComponents.HONEY_BOTTLE, GAHTComponents.SMALL_ENBY)
             .useRemainder(Items.GLASS_BOTTLE));
 
-    public static final Item LARGE_ENBY_JUICE = registerItem("large_enby_juice", TooltippedConsumableItem::new, new Item.Settings()
-            .food(GAHTComponents.BIG_HONEY, GAHTComponents.LARGE_ENBY));
+    public static final Item LARGE_ENBY_JUICE = registerItem("large_enby_juice", LargeBottleEffectItem::new, new Item.Settings()
+            .food(GAHTComponents.BIG_HONEY, GAHTComponents.LARGE_ENBY)
+    );
 
     // bottle of genderfluid, agender, + gender Items
 
