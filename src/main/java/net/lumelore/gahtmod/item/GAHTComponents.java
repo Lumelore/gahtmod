@@ -13,6 +13,8 @@ import net.minecraft.sound.SoundEvents;
 
 public class GAHTComponents {
     // 28800 ticks is 24 minutes
+    // 16800 ticks is 14 minutes
+    // 14400 ticks is 12 minutes
     //  9600 ticks is  8 minutes
     //  3600 ticks is  3 minutes
     //  2400 ticks is  2 minutes
@@ -26,15 +28,15 @@ public class GAHTComponents {
     
     public static final ConsumableComponent SMALL_CRUNCHY_ESTROGEN_CONSUMABLE = ConsumableComponent.builder()
             .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(ModEffects.GIRL_POWER, 4800, 0)))
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 1200, 0)))
+            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 100, 0)))
             .build();
 
     public static final ConsumableComponent LARGE_ESTROGEN_CONSUMABLE = ConsumableComponent.builder()
             .sound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK)
             .finishSound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK)
             .useAction(UseAction.DRINK)
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(ModEffects.GIRL_POWER, 18000, 0)))
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 2400, 1)))
+            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(ModEffects.GIRL_POWER, 14400, 0)))
+            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 160, 1)))
             .consumeParticles(false)
             .build();
 
@@ -47,7 +49,7 @@ public class GAHTComponents {
 
     public static final ConsumableComponent PROGESTERONE_CAPSULE_CONSUMABLE = ConsumableComponent.builder()
             .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(ModEffects.GIRL_POWER, 4800, 0)))
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 1200, 0)))
+            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 100, 0)))
             .consumeEffect(new RemoveEffectsConsumeEffect(ModEffects.BOY_POWER))
             .consumeEffect(new RemoveEffectsConsumeEffect(StatusEffects.SLOWNESS))
             .consumeEffect(new RemoveEffectsConsumeEffect(StatusEffects.WEAKNESS))
@@ -58,15 +60,15 @@ public class GAHTComponents {
 
     public static final ConsumableComponent SMALL_CRUNCHY_TESTOSTERONE_CONSUMABLE = ConsumableComponent.builder()
             .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(ModEffects.BOY_POWER, 4800, 0)))
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 1200, 0)))
+            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 200, 0)))
             .build();
 
     public static final ConsumableComponent LARGE_TESTOSTERONE_CONSUMABLE = ConsumableComponent.builder()
             .sound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK)
             .finishSound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK)
             .useAction(UseAction.DRINK)
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(ModEffects.BOY_POWER, 18000, 0)))
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 2400, 1)))
+            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(ModEffects.BOY_POWER, 14400, 0)))
+            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 500, 0)))
             .consumeParticles(false)
             .build();
 
@@ -84,7 +86,7 @@ public class GAHTComponents {
             .finishSound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK)
             .useAction(UseAction.DRINK)
             .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(ModEffects.ENBY_POWER, 4800, 0)))
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 1200, 0)))
+            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 200, 0)))
             .consumeParticles(false)
             .build();
 
@@ -92,8 +94,8 @@ public class GAHTComponents {
             .sound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK)
             .finishSound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK)
             .useAction(UseAction.DRINK)
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(ModEffects.ENBY_POWER, 18000, 0)))
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 2400, 1)))
+            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(ModEffects.ENBY_POWER, 14400, 0)))
+            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 600, 0)))
             .consumeParticles(false)
             .build();
 
