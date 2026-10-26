@@ -14,7 +14,7 @@ import net.minecraft.world.event.GameEvent;
 public class BottleOfGenderItem extends TooltippedConsumableItem {
 
     public BottleOfGenderItem(Settings settings) {
-        super(settings);
+        super(settings.maxCount(1));
     }
 
     @Override

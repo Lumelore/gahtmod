@@ -1,5 +1,6 @@
 package net.lumelore.gahtmod.item.special;
 
+import net.lumelore.gahtmod.GAHTMod;
 import net.lumelore.gahtmod.effect.ModEffects;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;
@@ -64,7 +65,12 @@ public class BottleOfGenderfluidItem extends TooltippedConsumableItem {
                         toApply = pool.remove((int) (Math.random() * pool.size()));
                         // give them the new effect
                         if (userHasWorseGenderEffect((PlayerEntity) user, toApply)) {
-                            user.addStatusEffect(new StatusEffectInstance(toApply, user.getStatusEffect(toRemove).getDuration(), 0));
+                            try {
+                                user.addStatusEffect(new StatusEffectInstance(toApply, user.getStatusEffect(toRemove).getDuration(), 0));
+                            }
+                            catch (NullPointerException e) {
+                                GAHTMod.LOGGER.warn("Caught NullPointerException while applying Bottle of Genderfluid item. (method: finishUsing)");
+                            }
                         }
                         // remove the old effect
                         user.removeStatusEffect(toRemove);
@@ -88,25 +94,29 @@ public class BottleOfGenderfluidItem extends TooltippedConsumableItem {
     private void giveGenderEffect(PlayerEntity user, RegistryEntry<StatusEffect> genderEffect) {
         user.addStatusEffect(new StatusEffectInstance(genderEffect, 4800, 0));
         if (genderEffect == ModEffects.GIRL_POWER) {
-            user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 600, 0));
+            user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 100, 0));
         }
         else if (genderEffect == ModEffects.BOY_POWER) {
-            user.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 600, 0));
+            user.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 200, 0));
         }
         else if (genderEffect == ModEffects.ENBY_POWER) {
-            user.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 600, 0));
+            user.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 200, 0));
         }
     }
 
     private boolean userHasWorseGenderEffect(PlayerEntity user, RegistryEntry<StatusEffect> genderEffect) {
         // if user has status effect
-        if (user.getStatusEffect(genderEffect) != null) {
-            // if status they already have has greater duration, then what they have is better
-            if (user.getStatusEffect(genderEffect).getDuration() > 4800) {
-                return false;
+        try {
+            if (user.getStatusEffect(genderEffect) != null) {
+                // if status they already have has greater duration, then what they have is better
+                if (user.getStatusEffect(genderEffect).getDuration() > 4800) {
+                    return false;
+                }
+                // this effect is better otherwise
+                return true;
             }
-            // this effect is better otherwise
-            return true;
+        } catch (NullPointerException e) {
+            GAHTMod.LOGGER.warn("Caught NullPointerException while applying Bottle of Genderfluid item. (method: userHasWorseGenderEffect)");
         }
         // user does not have effect, and thus they have a worse one
         return true;
