@@ -6,6 +6,7 @@ import net.lumelore.gahtmod.effect.ModEffects;
 import net.lumelore.gahtmod.item.ModItemGroups;
 import net.lumelore.gahtmod.item.ModItems;
 import net.lumelore.gahtmod.network.GAHTPayloads;
+import net.lumelore.gahtmod.recipe.ModRecipes;
 import net.lumelore.gahtmod.sound.ModSounds;
 import net.lumelore.gahtmod.util.EffectUtil;
 import org.slf4j.Logger;
@@ -24,6 +25,7 @@ public class GAHTMod implements ModInitializer {
 		ModItemGroups.registerItemGroups();
 		ModEffects.registerModEffects();
 		ModSounds.registerSounds();
+        ModRecipes.registerRecipes();
 		GAHTPayloads.registerPayloads();
 
 		// Receiver Registers
