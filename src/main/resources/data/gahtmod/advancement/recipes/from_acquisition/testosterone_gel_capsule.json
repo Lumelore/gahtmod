@@ -1,0 +1,25 @@
+{
+  "criteria": {
+    "get_pill": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "gahtmod:testosterone_gel_capsule"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_pill"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gahtmod:testosterone_gel_capsule_from_rod",
+      "gahtmod:testosterone_gel_capsule"
+    ]
+  }
+}

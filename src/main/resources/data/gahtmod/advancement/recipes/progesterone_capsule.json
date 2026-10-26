@@ -1,0 +1,67 @@
+{
+  "criteria": {
+    "get_pill": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "gahtmod:estrogen_pill"
+          }
+        ]
+      }
+    },
+    "get_blocker": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "gahtmod:testosterone_blocker"
+          }
+        ]
+      }
+    },
+    "get_fruit": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:chorus_fruit"
+          }
+        ]
+      }
+    },
+    "get_fruit_popped": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:popped_chorus_fruit"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_pill"
+    ],
+    [
+      "get_blocker"
+    ],
+    [
+      "get_fruit",
+      "get_fruit_popped"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gahtmod:progesterone_capsule",
+      "gahtmod:progesterone_capsule_pill_ingredients_charge_variant",
+      "gahtmod:progesterone_capsule_pill_ingredients_rod_variant",
+      "gahtmod:progesterone_capsule_pill_ingredients_with_e",
+      "gahtmod:progesterone_capsule_pill_ingredients_with_tblocker_charge_variant",
+      "gahtmod:progesterone_capsule_pill_ingredients_with_tblocker_rod_variant"
+
+    ]
+  }
+}

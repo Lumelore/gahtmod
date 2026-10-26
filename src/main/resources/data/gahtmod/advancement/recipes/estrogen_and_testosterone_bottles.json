@@ -1,0 +1,33 @@
+{
+  "criteria": {
+    "get_oily": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "gahtmod:bottle_of_oil_solution"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_oily"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gahtmod:bottle_of_estrogen",
+      "gahtmod:bottle_of_testosterone",
+
+      "gahtmod:bottle_of_estrogen_from_charges",
+      "gahtmod:bottle_of_testosterone_from_powder",
+
+      "gahtmod:bottle_of_estrogen_from_rods",
+      "gahtmod:bottle_of_testosterone_from_rod",
+
+      "gahtmod:bottle_of_estrogen_from_charge_and_rod"
+    ]
+  }
+}

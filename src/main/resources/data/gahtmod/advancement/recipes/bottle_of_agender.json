@@ -1,0 +1,37 @@
+{
+  "criteria": {
+    "get_obsidian": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:obsidian"
+          }
+        ]
+      }
+    },
+    "get_membrane": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:phantom_membrane"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_membrane"
+    ],
+    [
+      "get_obsidian"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gahtmod:bottle_of_agender"
+    ]
+  }
+}

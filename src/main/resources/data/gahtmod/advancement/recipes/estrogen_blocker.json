@@ -1,0 +1,59 @@
+{
+  "criteria": {
+    "get_wart": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:nether_wart"
+          }
+        ]
+      }
+    },
+    "get_gender_pill": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "gahtmod:testosterone_gel_capsule"
+          }
+        ]
+      }
+    },
+    "get_gender_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "gahtmod:bottle_of_testosterone"
+          }
+        ]
+      }
+    },
+    "get_fluid_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "gahtmod:bottle_of_genderfluid"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_wart"
+    ],
+    [
+      "get_gender_pill",
+      "get_gender_bottle",
+      "get_fluid_bottle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gahtmod:estrogen_blocker"
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "criteria": {
+    "get_honey": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:honeycomb"
+          }
+        ]
+      }
+    },
+    "get_gender_ingredient": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:blaze_powder"
+          }
+        ]
+      }
+    },
+    "get_gender_rod": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:blaze_rod"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_honey"
+    ],
+    [
+      "get_gender_ingredient",
+      "get_gender_rod"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gahtmod:testosterone_gel_capsule_from_rod",
+      "gahtmod:testosterone_gel_capsule"
+    ]
+  }
+}

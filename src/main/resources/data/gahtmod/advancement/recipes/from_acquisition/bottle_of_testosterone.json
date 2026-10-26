@@ -1,0 +1,26 @@
+{
+  "criteria": {
+    "get_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "gahtmod:bottle_of_testosterone"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_bottle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gahtmod:bottle_of_testosterone",
+      "gahtmod:bottle_of_testosterone_from_powder",
+      "gahtmod:bottle_of_testosterone_from_rod"
+    ]
+  }
+}
