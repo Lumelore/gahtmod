@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "glass_bottle",
+  "ingredients": [
+    "gahtmod:bottle_of_oil_solution"
+  ],
+  "result": {
+    "id": "minecraft:glass_bottle",
+    "count": 1
+  }
+}
