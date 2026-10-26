@@ -3,12 +3,11 @@
   "category": "misc",
   "group": "gahtmod.estrogen_pill",
   "ingredients": [
-    {"item": "minecraft:wind_charge"},
-    {"item": "minecraft:wind_charge"},
-    {"item": "minecraft:wind_charge"},
-    {"item": "minecraft:wind_charge"},
-    {"item": "minecraft:sugar"},
-    {"item": "minecraft:light_blue_dye"}
+    "minecraft:wind_charge",
+    "minecraft:wind_charge",
+    "minecraft:wind_charge",
+    "minecraft:wind_charge",
+    "minecraft:honeycomb"
   ],
   "result": {
     "id": "gahtmod:estrogen_pill",

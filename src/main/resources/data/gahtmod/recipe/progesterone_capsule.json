@@ -1,10 +1,11 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
+  "group": "gahtmod.progesterone_capsule",
   "ingredients": [
-    {"item": "gahtmod:estrogen_pill"},
-    {"item": "gahtmod:testosterone_blocker"},
-    {"item": "minecraft:popped_chorus_fruit"}
+    "minecraft:popped_chorus_fruit",
+    "gahtmod:estrogen_pill",
+    "gahtmod:testosterone_blocker"
   ],
   "result": {
     "id": "gahtmod:progesterone_capsule",

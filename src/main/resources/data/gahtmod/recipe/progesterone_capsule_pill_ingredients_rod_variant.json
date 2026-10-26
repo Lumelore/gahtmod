@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "gahtmod.progesterone_capsule",
+  "ingredients": [
+    "minecraft:popped_chorus_fruit",
+    "minecraft:breeze_rod",
+    "minecraft:honeycomb",
+    "minecraft:prismarine_shard",
+    "minecraft:nether_wart",
+    "minecraft:glistering_melon_slice"
+  ],
+  "result": {
+    "id": "gahtmod:progesterone_capsule",
+    "count": 1
+  }
+}

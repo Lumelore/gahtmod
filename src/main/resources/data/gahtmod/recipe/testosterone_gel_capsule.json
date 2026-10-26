@@ -1,10 +1,10 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
+  "group": "gahtmod.testosterone_capsule",
   "ingredients": [
-    {"item": "minecraft:magma_cream"},
-    {"item": "minecraft:blaze_powder"},
-    {"item": "minecraft:orange_dye"}
+    "minecraft:blaze_powder",
+    "minecraft:honeycomb"
   ],
   "result": {
     "id": "gahtmod:testosterone_gel_capsule",

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "gahtmod.genderfluid",
+  "ingredients": [
+    "minecraft:blaze_powder",
+    "minecraft:wind_charge",
+    "minecraft:amethyst_shard",
+    "minecraft:wind_charge",
+    "gahtmod:bottle_of_agender",
+    "minecraft:wind_charge",
+    "minecraft:honeycomb",
+    "minecraft:wind_charge"
+  ],
+  "result": {
+    "id": "gahtmod:bottle_of_genderfluid",
+    "count": 1
+  }
+}

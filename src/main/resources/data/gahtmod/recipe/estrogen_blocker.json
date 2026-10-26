@@ -2,9 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {"item": "minecraft:magma_cream"},
-    {"item": "minecraft:nether_wart"},
-    {"item": "minecraft:red_dye"}
+    "minecraft:magma_cream",
+    "minecraft:nether_wart",
+    "minecraft:glistering_melon_slice"
   ],
   "result": {
     "id": "gahtmod:estrogen_blocker",

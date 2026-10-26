@@ -3,9 +3,8 @@
   "category": "misc",
   "group": "gahtmod.estrogen_pill",
   "ingredients": [
-    {"item": "minecraft:breeze_rod"},
-    {"item": "minecraft:sugar"},
-    {"item": "minecraft:light_blue_dye"}
+    "minecraft:breeze_rod",
+    "minecraft:honeycomb"
   ],
   "result": {
     "id": "gahtmod:estrogen_pill",

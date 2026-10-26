@@ -3,7 +3,7 @@
   "category": "misc",
   "group": "gahtmod.enby_juice",
   "ingredients": [
-    {"item": "gahtmod:large_enby_juice"}
+    "gahtmod:large_enby_juice"
   ],
   "result": {
     "id": "gahtmod:enby_juice",

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "gahtmod.bottle_of_testosterone",
+  "ingredients": [
+    "minecraft:blaze_powder",
+    "gahtmod:bottle_of_oil_solution",
+    "minecraft:blaze_powder",
+    "minecraft:honeycomb"
+  ],
+  "result": {
+    "id": "gahtmod:bottle_of_testosterone",
+    "count": 1
+  }
+}
