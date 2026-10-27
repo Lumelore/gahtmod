@@ -1,8 +1,11 @@
 package net.lumelore.gahtmod.item.special;
 
 import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.component.type.PotionContentsComponent;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffectUtil;
@@ -18,6 +21,10 @@ import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import static net.lumelore.gahtmod.effect.ModEffects.BOY_POWER;
+import static net.lumelore.gahtmod.effect.ModEffects.GIRL_POWER;
 
 public class TooltippedConsumableItem extends Item {
 
@@ -34,7 +41,7 @@ public class TooltippedConsumableItem extends Item {
         // To hold effect text until they are ready to be added
         ArrayList<Text> addEffects = new ArrayList<>();
         ArrayList<Text> removeEffects = new ArrayList<>();
-
+        ArrayList<Text> modifiers = new ArrayList<>();
         // Put consumableComponent effects into the tooltip if present
         if (consumableComponent != null) {
             consumableComponent.onConsumeEffects().forEach(consumeEffect -> {
@@ -42,7 +49,7 @@ public class TooltippedConsumableItem extends Item {
                 if (consumeEffect instanceof ApplyEffectsConsumeEffect) {
                     // Get the effects
                     List<StatusEffectInstance> effects = ((ApplyEffectsConsumeEffect) consumeEffect).effects();
-
+                    AtomicBoolean containsBoyOrGirlEffects = new AtomicBoolean(false);
                     // Iterate through effects in the component
                     effects.forEach(effect -> {
                         // Add each effect in component to list of effects to be applied
@@ -52,6 +59,14 @@ public class TooltippedConsumableItem extends Item {
                                         .append(getDuration(effect, context.getUpdateTickRate())) // Duration
                                         .formatted(effect.getEffectType().value().getCategory().getFormatting())
                         );
+
+                        // Boy power and girl power attributes don't stack, so don't double add them
+                        if ((effect.getEffectType() == BOY_POWER && !containsBoyOrGirlEffects.get()) || (effect.getEffectType() == GIRL_POWER && !containsBoyOrGirlEffects.get()) ) {
+                            modifiers.addAll(modifierText(effect));
+                            containsBoyOrGirlEffects.set(true);
+                        } else if (effect.getEffectType() != BOY_POWER && effect.getEffectType() != GIRL_POWER) {
+                            modifiers.addAll(modifierText(effect));
+                        }
                     });
                 }
 
@@ -72,12 +87,24 @@ public class TooltippedConsumableItem extends Item {
 
         // Repeat above for potion shit
         if (potionComponent != null) {
-            potionComponent.forEachEffect(effect -> addEffects.add(
-                    Text.translatable(effect.getTranslationKey()) // Effect Name
+            AtomicBoolean containsBoyOrGirlEffects = new AtomicBoolean(false);
+
+            potionComponent.forEachEffect(effect -> {
+                addEffects.add(
+                        Text.translatable(effect.getTranslationKey()) // Effect Name
                             .append(getAmplifier(effect)) // Amplifier (includes space(s))
                             .append(getDuration(effect, context.getUpdateTickRate())) // Duration
                             .formatted(effect.getEffectType().value().getCategory().getFormatting())
-            ));
+                );
+
+                // Boy power and girl power attributes don't stack, so don't double add them
+                if ((effect.getEffectType() == BOY_POWER && !containsBoyOrGirlEffects.get()) || (effect.getEffectType() == GIRL_POWER && !containsBoyOrGirlEffects.get()) ) {
+                    modifiers.addAll(modifierText(effect));
+                    containsBoyOrGirlEffects.set(true);
+                } else if (effect.getEffectType() != BOY_POWER && effect.getEffectType() != GIRL_POWER) {
+                    modifiers.addAll(modifierText(effect));
+                }
+            });
         }
 
         // Add given effects (if present)
@@ -95,6 +122,13 @@ public class TooltippedConsumableItem extends Item {
             tooltip.add(Text.translatable("tooltip.gahtmod.removes_effects").formatted(Formatting.DARK_PURPLE));
             // List remove effects
             tooltip.addAll(removeEffects);
+        }
+
+        // Add modifiers at the very bottom
+        if (!modifiers.isEmpty()) {
+            tooltip.add(Text.of(""));
+            tooltip.add(Text.translatable("potion.whenDrank").formatted(Formatting.DARK_PURPLE));
+            tooltip.addAll(modifiers);
         }
 
     }
@@ -118,6 +152,47 @@ public class TooltippedConsumableItem extends Item {
             return Text.of("(" + StatusEffectUtil.getDurationText(effect, 1f, tickRate).getLiteralString() + ")");
         }
         return Text.empty();
+    }
+
+    private static ArrayList<Text> modifierText(StatusEffectInstance effect) {
+        ArrayList<Text> modifiers = new ArrayList<>();
+
+        effect.getEffectType().value().forEachAttributeModifier(effect.getAmplifier(),
+                (attribute, modifier) ->
+                {
+                    double value = modifier.operation() == EntityAttributeModifier.Operation.ADD_VALUE
+                            ? modifier.value()
+                            : modifier.value() * 100; // multiply by 100 if percent
+
+                    Text built;
+                    // Change up how fall damage multiplier is communicated cause the default text seems to imply the opposite
+                    if (attribute.getIdAsString().equals(EntityAttributes.FALL_DAMAGE_MULTIPLIER.getIdAsString())) {
+                        built = modifier.value() < 1
+                                ? Text.translatable("attribute.modifier.take." + modifier.operation().getId(),
+                                        AttributeModifiersComponent.DECIMAL_FORMAT.format(value),
+                                        Text.translatable("attribute.gahtmod.custom_text.fall_damage"))
+                                            .formatted(Formatting.BLUE)
+                                : Text.translatable("attribute.modifier.plus." + modifier.operation().getId(),
+                                        AttributeModifiersComponent.DECIMAL_FORMAT.format(value),
+                                        Text.translatable("attribute.gahtmod.custom_text.fall_damage"))
+                                            .formatted(Formatting.RED);
+                    }
+                    // Every other attribute
+                    else {
+                        built = modifier.value() > 0
+                                ? Text.translatable("attribute.modifier.plus." + modifier.operation().getId(),
+                                        AttributeModifiersComponent.DECIMAL_FORMAT.format(value),
+                                        Text.translatable(attribute.value().getTranslationKey()))
+                                            .formatted(Formatting.BLUE)
+                                : Text.translatable("attribute.modifier.take." + modifier.operation().getId(),
+                                        AttributeModifiersComponent.DECIMAL_FORMAT.format(value),
+                                        Text.translatable(attribute.value().getTranslationKey()))
+                                            .formatted(Formatting.RED);
+                    }
+
+                    modifiers.add(built);
+                });
+        return modifiers;
     }
 
 }
