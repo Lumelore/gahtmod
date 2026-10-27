@@ -22,6 +22,7 @@
   "effect.gahtmod.boy_power": "Boy Power",
   "effect.gahtmod.enby_power": "Enby Power",
 
+  "attribute.gahtmod.custom_text.fall_damage": "Fall Damage",
 
   "sounds.gahtmod.reverse_drinking": "Reversed sipping",
   "sounds.gahtmod.dash": "Dash whoosh",

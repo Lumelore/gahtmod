@@ -22,6 +22,7 @@
   "effect.gahtmod.boy_power": "Force d'Homme",
   "effect.gahtmod.enby_power": "Force d'Enby",
 
+  "attribute.gahtmod.custom_text.fall_damage": "en dégâts de chute",
 
   "sounds.gahtmod.reverse_drinking": "En train de boire à l'envers",
   "sounds.gahtmod.dash": "Souffle de course",
