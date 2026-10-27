@@ -1,0 +1,39 @@
+{
+  "parent": "gahtmod:effect/saving_it",
+  "display": {
+    "icon": {
+      "id": "gahtmod:bottle_of_gender",
+      "count": 1
+    },
+    "title": {
+      "translate": "advancements.gahtmod.maximum_gender.title"
+    },
+    "description": {
+      "translate": "advancements.gahtmod.maximum_gender.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_effects": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "gahtmod:enby_power": {},
+          "gahtmod:girl_power": {},
+          "gahtmod:boy_power": {}
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_effects"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  }
+}

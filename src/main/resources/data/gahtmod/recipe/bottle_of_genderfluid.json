@@ -3,18 +3,14 @@
   "category": "misc",
   "group": "gahtmod.genderfluid",
   "ingredients": [
-    {"item": "gahtmod:enby_juice"},
-    {"item": "gahtmod:estrogen_pill"},
-    {"item": "gahtmod:testosterone_blocker"},
-    {"item": "gahtmod:testosterone_gel_capsule"},
-    {"item": "gahtmod:estrogen_blocker"},
-    {"item": "minecraft:potion"},
-    {"item": "minecraft:potion"},
-    {"item": "minecraft:potion"},
-    {"item": "minecraft:potion"}
+    "gahtmod:bottle_of_agender",
+    "minecraft:honeycomb",
+    "minecraft:amethyst_shard",
+    "minecraft:breeze_rod",
+    "minecraft:blaze_powder"
   ],
   "result": {
     "id": "gahtmod:bottle_of_genderfluid",
-    "count": 5
+    "count": 1
   }
 }

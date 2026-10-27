@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "gahtmod.testosterone_capsule",
+  "ingredients": [
+    "minecraft:blaze_rod",
+    "minecraft:honeycomb",
+    "minecraft:honeycomb"
+  ],
+  "result": {
+    "id": "gahtmod:testosterone_gel_capsule",
+    "count": 2
+  }
+}

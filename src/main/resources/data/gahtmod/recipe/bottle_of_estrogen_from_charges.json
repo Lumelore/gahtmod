@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "gahtmod.bottle_of_estrogen",
+  "ingredients": [
+    "minecraft:wind_charge",
+    "gahtmod:estrogen_pill",
+    "minecraft:wind_charge",
+    "minecraft:wind_charge",
+    "gahtmod:bottle_of_oil_solution",
+    "minecraft:wind_charge"
+  ],
+  "result": {
+    "id": "gahtmod:bottle_of_estrogen",
+    "count": 1
+  }
+}

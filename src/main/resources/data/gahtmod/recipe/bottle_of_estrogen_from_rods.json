@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "gahtmod.bottle_of_estrogen",
+  "ingredients": [
+    "minecraft:breeze_rod",
+    "gahtmod:bottle_of_oil_solution",
+    "minecraft:breeze_rod",
+    "minecraft:honeycomb"
+  ],
+  "result": {
+    "id": "gahtmod:bottle_of_estrogen",
+    "count": 1
+  }
+}

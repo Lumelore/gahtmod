@@ -1,0 +1,38 @@
+{
+  "criteria": {
+    "get_honey": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:honey_bottle"
+          }
+        ]
+      }
+    },
+    "get_gender_ingredient": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:amethyst_shard"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_honey"
+    ],
+    [
+      "get_gender_ingredient"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gahtmod:enby_juice",
+      "gahtmod:large_enby_juice"
+    ]
+  }
+}

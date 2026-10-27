@@ -1,0 +1,25 @@
+{
+  "criteria": {
+    "get_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "gahtmod:bottle_of_agender"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_bottle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gahtmod:bottle_of_genderfluid",
+      "gahtmod:bottle_of_genderfluid_from_charges"
+    ]
+  }
+}

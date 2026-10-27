@@ -1,0 +1,24 @@
+{
+  "criteria": {
+    "get_pill": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "gahtmod:testosterone_blocker"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_pill"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gahtmod:testosterone_blocker"
+    ]
+  }
+}

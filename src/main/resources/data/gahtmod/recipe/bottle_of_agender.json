@@ -2,9 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {"item": "minecraft:sculk"},
-    {"item": "minecraft:glass_bottle"},
-    {"item": "minecraft:black_dye"}
+    "minecraft:phantom_membrane",
+    "minecraft:obsidian",
+    "minecraft:glass_bottle"
   ],
   "result": {
     "id": "gahtmod:bottle_of_agender",

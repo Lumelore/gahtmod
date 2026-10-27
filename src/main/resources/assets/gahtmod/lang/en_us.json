@@ -15,12 +15,14 @@
   "item.gahtmod.bottle_of_genderfluid": "Bottle of Genderfluid",
   "item.gahtmod.bottle_of_agender": "Bottle of Agender",
   "item.gahtmod.bottle_of_gender": "Bottle of Gender",
+  "item.gahtmod.bottle_of_oil_solution":  "Bottle of Oil Solution",
 
 
   "effect.gahtmod.girl_power": "Girl Power",
   "effect.gahtmod.boy_power": "Boy Power",
   "effect.gahtmod.enby_power": "Enby Power",
 
+  "attribute.gahtmod.custom_text.fall_damage": "Fall Damage",
 
   "sounds.gahtmod.reverse_drinking": "Reversed sipping",
   "sounds.gahtmod.dash": "Dash whoosh",
@@ -28,8 +30,12 @@
 
 
   "tooltip.gahtmod.removes_effects": "Removes effects: ",
-  "tooltip.gahtmod.bottle_of_agender": "Removes genders",
+  "tooltip.gahtmod.bottle_of_agender": "Removes and stores genders",
   "tooltip.gahtmod.bottle_of_genderfluid.line1": "Randomly gives, changes",
-  "tooltip.gahtmod.bottle_of_genderfluid.line2": "or removes genders"
+  "tooltip.gahtmod.bottle_of_genderfluid.line2": "or removes genders",
 
+  "advancements.gahtmod.maximum_gender.title": "Maximum Gender",
+  "advancements.gahtmod.maximum_gender.description": "Have every gender effect simultaneously",
+  "advancements.gahtmod.saving_it.title": "Saving It for Later",
+  "advancements.gahtmod.saving_it.description": "Use a Bottle of Agender"
 }

@@ -1,0 +1,24 @@
+{
+  "criteria": {
+    "get_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "gahtmod:bottle_of_oil_solution"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_bottle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gahtmod:glass_bottle_from_oil_bottle"
+    ]
+  }
+}

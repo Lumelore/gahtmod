@@ -1,0 +1,30 @@
+{
+  "criteria": {
+    "get_pill": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "gahtmod:progesterone_capsule"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_pill"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gahtmod:progesterone_capsule",
+      "gahtmod:progesterone_capsule_pill_ingredients_charge_variant",
+      "gahtmod:progesterone_capsule_pill_ingredients_rod_variant",
+      "gahtmod:progesterone_capsule_pill_ingredients_with_e",
+      "gahtmod:progesterone_capsule_pill_ingredients_with_tblocker_charge_variant",
+      "gahtmod:progesterone_capsule_pill_ingredients_with_tblocker_rod_variant"
+
+    ]
+  }
+}

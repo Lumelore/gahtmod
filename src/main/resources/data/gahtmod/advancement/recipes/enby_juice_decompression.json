@@ -1,0 +1,24 @@
+{
+  "criteria": {
+    "get_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "gahtmod:large_enby_juice"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_bottle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gahtmod:enby_juice_from_decompression"
+    ]
+  }
+}

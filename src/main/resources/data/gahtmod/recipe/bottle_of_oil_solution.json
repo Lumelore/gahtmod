@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "gahtmod.bottle_of_oil_solution",
+  "ingredients": [
+    "minecraft:pumpkin_seeds",
+    "minecraft:pink_petals",
+    "minecraft:pumpkin_seeds",
+    "minecraft:pumpkin_seeds",
+    "minecraft:glass_bottle",
+    "minecraft:pumpkin_seeds",
+    "minecraft:pumpkin_seeds",
+    "minecraft:pumpkin_seeds",
+    "minecraft:pumpkin_seeds"
+  ],
+  "result": {
+    "id": "gahtmod:bottle_of_oil_solution",
+    "count": 1
+  }
+}

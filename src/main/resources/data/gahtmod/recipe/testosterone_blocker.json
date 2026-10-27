@@ -3,9 +3,9 @@
   "category": "misc",
   "group": "gahtmod.testosterone_blocker",
   "ingredients": [
-    {"item": "minecraft:breeze_rod"},
-    {"item": "minecraft:nether_wart"},
-    {"item": "minecraft:white_dye"}
+    "minecraft:prismarine_shard",
+    "minecraft:nether_wart",
+    "minecraft:glistering_melon_slice"
   ],
   "result": {
     "id": "gahtmod:testosterone_blocker",

@@ -1,11 +1,11 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
+  "group": "gahtmod.bottle_of_estrogen",
   "ingredients": [
-    {"item": "gahtmod:estrogen_pill"},
-    {"item": "gahtmod:estrogen_pill"},
-    {"item": "gahtmod:estrogen_pill"},
-    {"item": "minecraft:potion"}
+    "gahtmod:estrogen_pill",
+    "gahtmod:bottle_of_oil_solution",
+    "minecraft:breeze_rod"
   ],
   "result": {
     "id": "gahtmod:bottle_of_estrogen",

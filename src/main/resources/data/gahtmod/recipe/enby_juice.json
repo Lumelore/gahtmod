@@ -1,13 +1,12 @@
 {
-  "type": "minecraft:crafting_shapeless",
+  "type": "gahtmod:no_remainders_shapeless",
   "category": "misc",
   "group": "gahtmod.enby_juice",
   "ingredients": [
-    {"item": "minecraft:amethyst_shard"},
-    {"item": "minecraft:honeycomb"},
-    {"item": "minecraft:string"},
-    {"item": "minecraft:glass_bottle"},
-    {"item": "minecraft:black_dye"}
+    "minecraft:honey_bottle",
+    "minecraft:amethyst_shard",
+    "minecraft:black_dye",
+    "minecraft:white_dye"
   ],
   "result": {
     "id": "gahtmod:enby_juice",

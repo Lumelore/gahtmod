@@ -1,0 +1,25 @@
+{
+  "criteria": {
+    "get_pill": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "gahtmod:estrogen_pill"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_pill"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gahtmod:estrogen_pill_from_charges",
+      "gahtmod:estrogen_pill"
+    ]
+  }
+}

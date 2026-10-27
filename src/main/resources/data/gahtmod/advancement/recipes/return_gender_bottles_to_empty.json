@@ -1,0 +1,37 @@
+{
+  "criteria": {
+    "get_agender": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "gahtmod:bottle_of_agender"
+          }
+        ]
+      }
+    },
+    "get_full": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "gahtmod:bottle_of_gender"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_agender"
+    ],
+    [
+      "get_full"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gahtmod:agender_gender_bottles_to_empty_bottle"
+    ]
+  }
+}

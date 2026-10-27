@@ -1,0 +1,27 @@
+{
+  "criteria": {
+    "get_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "gahtmod:bottle_of_estrogen"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_bottle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gahtmod:bottle_of_estrogen",
+      "gahtmod:bottle_of_estrogen_from_charges",
+      "gahtmod:bottle_of_estrogen_from_rods",
+      "gahtmod:bottle_of_estrogen_from_charge_and_rod"
+    ]
+  }
+}
