@@ -1,25 +1,26 @@
 package net.lumelore.gahtmod.item.special;
 
 import net.lumelore.gahtmod.GAHTMod;
-import net.lumelore.gahtmod.effect.ModEffects;
+import net.lumelore.gahtmod.effect.ModMobEffects;
 import net.lumelore.gahtmod.item.ModItems;
-import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.PotionContentsComponent;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.stat.Stats;
-import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
+import net.minecraft.ChatFormatting;
+import net.minecraft.advancements.triggers.CriteriaTriggers;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
+import net.minecraft.util.Prediction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.component.ItemLore;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,76 +28,83 @@ import java.util.Optional;
 
 public class BottleOfAgenderItem extends Item {
 
-    public BottleOfAgenderItem(Settings settings) {
-        super(settings);
+    public BottleOfAgenderItem(Properties properties) {
+        super(properties
+                .component(DataComponents.LORE,
+                        new ItemLore(List.of(Component
+                                .translatable("tooltip.gahtmod.bottle_of_agender")
+                                .withStyle(ChatFormatting.GRAY))))
+        );
     }
 
     @Override
-    public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        // Add to item usage statistics
-        if (user instanceof ServerPlayerEntity serverPlayerEntity) {
-            Criteria.CONSUME_ITEM.trigger(serverPlayerEntity, stack);
-            serverPlayerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
-            user.emitGameEvent(GameEvent.DRINK);
+    public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity entity) {
+        if (entity instanceof ServerPlayer player) {
+            // Do item stats/event stuff
+            CriteriaTriggers.CONSUME_ITEM.trigger(player, itemStack);
+            player.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
+            player.gameEvent(GameEvent.DRINK);
 
             // Give the player a gender bottle when they are done drinking it
             // if they have genders to remove
-            if (   user.getStatusEffect(ModEffects.GIRL_POWER) != null
-                || user.getStatusEffect(ModEffects.BOY_POWER)  != null
-                || user.getStatusEffect(ModEffects.ENBY_POWER) != null
+            if (   player.getEffect(ModMobEffects.GIRL_POWER) != null
+                || player.getEffect(ModMobEffects.BOY_POWER)  != null
+                || player.getEffect(ModMobEffects.ENBY_POWER) != null
             ) {
                 // Putting statuses into bottle of gender item
-                ItemStack itemStack = new ItemStack(ModItems.BOTTLE_OF_GENDER);
-                loadDataIntoItem((PlayerEntity) user, itemStack);
+                ItemStack filledBottle = new ItemStack(ModItems.BOTTLE_OF_GENDER);
+                loadDataIntoItem(player, filledBottle);
 
                 // Remove the following statuses from player
-                if (!world.isClient) {
-                    user.removeStatusEffect(ModEffects.BOY_POWER);
-                    user.removeStatusEffect(ModEffects.GIRL_POWER);
-                    user.removeStatusEffect(ModEffects.ENBY_POWER);
+                if (!level.isClientSide()) {
+                    player.removeEffect(ModMobEffects.GIRL_POWER);
+                    player.removeEffect(ModMobEffects.BOY_POWER);
+                    player.removeEffect(ModMobEffects.ENBY_POWER);
                 }
+
                 // Deplete stack by 1
-                stack.decrementUnlessCreative(1, user);
+                itemStack.consume(1, player);
+
                 // Put the new item in the players hand if they used their last bottle of agender
-                if (stack.isEmpty()) {
-                    return itemStack;
+                if (itemStack.isEmpty()) {
+                    return filledBottle;
                 }
                 // Else try to insert it into inventory, if not throw onto ground.
-                else if (!((PlayerEntity) user).getInventory().insertStack(itemStack)) {
-                    ((PlayerEntity) user).dropItem(itemStack, false);
+                else if (!player.getInventory().add(filledBottle)) {
+                    player.drop(filledBottle, false, Prediction.PREDICTED);
                 }
             }
         }
 
-        return stack;
+        return itemStack;
     }
 
-    private void loadDataIntoItem(PlayerEntity player, ItemStack stack) {
-        ArrayList<StatusEffectInstance> potionList = new ArrayList<>(3);
+    private void loadDataIntoItem(Player player, ItemStack stack) {
+        ArrayList<MobEffectInstance> potionList = new ArrayList<>(3);
         try {
             // Put girl power into list if player has it
-            if (player.getStatusEffect(ModEffects.GIRL_POWER) != null
-                    && player.getStatusEffect(ModEffects.GIRL_POWER).getDuration() > 20
+            if (player.getEffect(ModMobEffects.GIRL_POWER) != null
+                    && player.getEffect(ModMobEffects.GIRL_POWER).getDuration() > 20
             ) {
-                potionList.add(new StatusEffectInstance(ModEffects.GIRL_POWER,
-                        player.getStatusEffect(ModEffects.GIRL_POWER).getDuration(),
-                        player.getStatusEffect(ModEffects.GIRL_POWER).getAmplifier()));
+                potionList.add(new MobEffectInstance(ModMobEffects.GIRL_POWER,
+                        player.getEffect(ModMobEffects.GIRL_POWER).getDuration(),
+                        player.getEffect(ModMobEffects.GIRL_POWER).getAmplifier()));
             }
             // Put boy power into list if player has it
-            if (player.getStatusEffect(ModEffects.BOY_POWER) != null
-                    && player.getStatusEffect(ModEffects.BOY_POWER).getDuration() > 20
+            if (player.getEffect(ModMobEffects.BOY_POWER) != null
+                    && player.getEffect(ModMobEffects.BOY_POWER).getDuration() > 20
             ) {
-                potionList.add(new StatusEffectInstance(ModEffects.BOY_POWER,
-                        player.getStatusEffect(ModEffects.BOY_POWER).getDuration(),
-                        player.getStatusEffect(ModEffects.BOY_POWER).getAmplifier()));
+                potionList.add(new MobEffectInstance(ModMobEffects.BOY_POWER,
+                        player.getEffect(ModMobEffects.BOY_POWER).getDuration(),
+                        player.getEffect(ModMobEffects.BOY_POWER).getAmplifier()));
             }
             // Put enby power into list if player has it
-            if (player.getStatusEffect(ModEffects.ENBY_POWER) != null
-                    && player.getStatusEffect(ModEffects.ENBY_POWER).getDuration() > 20
+            if (player.getEffect(ModMobEffects.ENBY_POWER) != null
+                    && player.getEffect(ModMobEffects.ENBY_POWER).getDuration() > 20
             ) {
-                potionList.add(new StatusEffectInstance(ModEffects.ENBY_POWER,
-                        player.getStatusEffect(ModEffects.ENBY_POWER).getDuration(),
-                        player.getStatusEffect(ModEffects.ENBY_POWER).getAmplifier()));
+                potionList.add(new MobEffectInstance(ModMobEffects.ENBY_POWER,
+                        player.getEffect(ModMobEffects.ENBY_POWER).getDuration(),
+                        player.getEffect(ModMobEffects.ENBY_POWER).getAmplifier()));
             }
         } catch (NullPointerException e) {
             // getDuration() and getAmplifier() throw if the player doesn't have the effect. Given that I do a null
@@ -104,24 +112,19 @@ public class BottleOfAgenderItem extends Item {
             // when it runs out. Better to be safe than sorry tho.
             GAHTMod.LOGGER.warn("Caught NullPointerException while loading effects into Bottle of Agender.");
         }
-        stack.set(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Optional.empty(), Optional.empty(), potionList, Optional.empty()));
+        stack.set(DataComponents.POTION_CONTENTS, new PotionContents(Optional.empty(), Optional.empty(), potionList, Optional.empty()));
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, TooltipContext tooltipContext, List<Text> tooltip, TooltipType type) {
-        tooltip.add(Text.translatable("tooltip.gahtmod.bottle_of_agender").formatted(Formatting.GRAY));
-        super.appendTooltip(stack, tooltipContext, tooltip, type);
-    }
-
-    @Override
-    public ActionResult use(World world, PlayerEntity user, Hand hand) {
-        // Stop item usage if no gender effects present
-        if (       user.getStatusEffect(ModEffects.GIRL_POWER) == null
-                && user.getStatusEffect(ModEffects.BOY_POWER)  == null
-                && user.getStatusEffect(ModEffects.ENBY_POWER) == null
+    public InteractionResult use(Level level, Player player, InteractionHand hand) {
+        // Don't use if no gender effects present
+        if (   player.getEffect(ModMobEffects.GIRL_POWER) == null
+            && player.getEffect(ModMobEffects.BOY_POWER)  == null
+            && player.getEffect(ModMobEffects.ENBY_POWER) == null
         ) {
-            return ActionResult.PASS;
+            return InteractionResult.PASS;
         }
-        return super.use(world, user, hand);
+        return super.use(level, player, hand);
     }
+
 }

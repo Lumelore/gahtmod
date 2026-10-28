@@ -1,56 +1,50 @@
 package net.lumelore.gahtmod.item.special;
 
-import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.PotionContentsComponent;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.stat.Stats;
-import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
+import net.minecraft.advancements.triggers.CriteriaTriggers;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
 
 public class BottleOfGenderItem extends TooltippedConsumableItem {
 
-    public BottleOfGenderItem(Settings settings) {
-        super(settings.maxCount(1));
+    public BottleOfGenderItem(Properties properties) {
+        super(properties
+                .stacksTo(1)
+                .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+        );
     }
 
     @Override
-    public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-
-        if (user instanceof ServerPlayerEntity serverPlayerEntity) {
-            user.emitGameEvent(GameEvent.DRINK);
-            Criteria.CONSUME_ITEM.trigger(serverPlayerEntity, stack);
-            serverPlayerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
+    public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity entity) {
+        if (entity instanceof ServerPlayer player) {
+            CriteriaTriggers.CONSUME_ITEM.trigger(player, itemStack);
+            player.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
+            player.gameEvent(GameEvent.DRINK);
 
             // Applying the effects
-            if (!world.isClient) {
-                PotionContentsComponent potionContentsComponent = stack.getOrDefault(DataComponentTypes.POTION_CONTENTS, PotionContentsComponent.DEFAULT);
-                potionContentsComponent.forEachEffect(effect -> {
+            if (!level.isClientSide()) {
+                PotionContents potionContents = itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
+                potionContents.forEachEffect(effect -> {
                     // None of the effects being added are instant but might as well leave it just in case
-                    if (effect.getEffectType().value().isInstant()) {
-                        effect.getEffectType().value().applyInstantEffect((ServerWorld) world, user, null, user, effect.getAmplifier(), 1.0);
+                    if (effect.getEffect().value().isInstantaneous()) {
+                        effect.getEffect().value().applyInstantaneousEffect((ServerLevel) level, player, null, player, effect.getAmplifier(), 1.0);
                     } else {
-                        user.addStatusEffect(effect);
+                        player.addEffect(effect);
                     }
-                });
+                }, 1);
             }
 
             // Be aware! Decrement can create an empty stack! (it will be air instead of gender bottle if player uses last one)
-            stack.decrementUnlessCreative(1, user);
-
+            itemStack.consume(1, player);
         }
 
-        return stack;
+        return itemStack;
     }
-
-    @Override
-    public boolean hasGlint(ItemStack stack) {
-        return true;
-    }
-
-
 
 }

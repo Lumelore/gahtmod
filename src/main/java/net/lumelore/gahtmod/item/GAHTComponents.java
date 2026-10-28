@@ -1,15 +1,15 @@
 package net.lumelore.gahtmod.item;
 
-import net.lumelore.gahtmod.effect.ModEffects;
+import net.lumelore.gahtmod.effect.ModMobEffects;
 import net.lumelore.gahtmod.sound.ModSounds;
-import net.minecraft.component.type.ConsumableComponent;
-import net.minecraft.component.type.FoodComponent;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.consume.ApplyEffectsConsumeEffect;
-import net.minecraft.item.consume.RemoveEffectsConsumeEffect;
-import net.minecraft.item.consume.UseAction;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.ItemUseAnimation;
+import net.minecraft.world.item.component.Consumable;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
+import net.minecraft.world.item.consume_effects.RemoveStatusEffectsConsumeEffect;
 
 public class GAHTComponents {
     // 28800 ticks is 24 minutes
@@ -20,97 +20,97 @@ public class GAHTComponents {
     //  2400 ticks is  2 minutes
     //  1200 ticks is  1  minute
 
-    public static final FoodComponent ALWAYS_EDIBLE = (new FoodComponent.Builder()).alwaysEdible().build();
+    public static final FoodProperties ALWAYS_EDIBLE = new FoodProperties(0, 0, true);
 
-    public static final FoodComponent BIG_HONEY = new FoodComponent.Builder().alwaysEdible().nutrition(12).saturationModifier(0.6f).build();
+    public static final FoodProperties BIG_HONEY = new FoodProperties(12, 0.6f, true);
 
     // ESTROGEN ITEMS
-    
-    public static final ConsumableComponent SMALL_CRUNCHY_ESTROGEN_CONSUMABLE = ConsumableComponent.builder()
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(ModEffects.GIRL_POWER, 4800, 0)))
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 100, 0)))
+
+    public static final Consumable SMALL_CRUNCHY_ESTROGEN_CONSUMABLE = Consumable.builder()
+            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(ModMobEffects.GIRL_POWER, 4800, 0)))
+            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 0)))
             .build();
 
-    public static final ConsumableComponent LARGE_ESTROGEN_CONSUMABLE = ConsumableComponent.builder()
-            .sound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK)
-            .finishSound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK)
-            .useAction(UseAction.DRINK)
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(ModEffects.GIRL_POWER, 14400, 0)))
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 160, 1)))
-            .consumeParticles(false)
+    public static final Consumable LARGE_ESTROGEN_CONSUMABLE = Consumable.builder()
+            .sound(SoundEvents.HONEY_DRINK)
+            .soundAfterConsume(SoundEvents.HONEY_DRINK)
+            .animation(ItemUseAnimation.DRINK)
+            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(ModMobEffects.GIRL_POWER, 14400, 0)))
+            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.REGENERATION, 160, 0)))
+            .hasConsumeParticles(false)
             .build();
 
-    public static final ConsumableComponent TESTOSTERONE_BLOCKER_CONSUMABLE = ConsumableComponent.builder()
-            .consumeEffect(new RemoveEffectsConsumeEffect(ModEffects.BOY_POWER))
-            .consumeEffect(new RemoveEffectsConsumeEffect(StatusEffects.SLOWNESS))
-            .consumeEffect(new RemoveEffectsConsumeEffect(StatusEffects.WEAKNESS))
-            .consumeEffect(new RemoveEffectsConsumeEffect(StatusEffects.WITHER))
+    public static final Consumable TESTOSTERONE_BLOCKER_CONSUMABLE = Consumable.builder()
+            .onConsume(new RemoveStatusEffectsConsumeEffect(ModMobEffects.BOY_POWER))
+            .onConsume(new RemoveStatusEffectsConsumeEffect(MobEffects.SLOWNESS))
+            .onConsume(new RemoveStatusEffectsConsumeEffect(MobEffects.WEAKNESS))
+            .onConsume(new RemoveStatusEffectsConsumeEffect(MobEffects.WITHER))
             .build();
 
-    public static final ConsumableComponent PROGESTERONE_CAPSULE_CONSUMABLE = ConsumableComponent.builder()
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(ModEffects.GIRL_POWER, 4800, 0)))
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 100, 0)))
-            .consumeEffect(new RemoveEffectsConsumeEffect(ModEffects.BOY_POWER))
-            .consumeEffect(new RemoveEffectsConsumeEffect(StatusEffects.SLOWNESS))
-            .consumeEffect(new RemoveEffectsConsumeEffect(StatusEffects.WEAKNESS))
-            .consumeEffect(new RemoveEffectsConsumeEffect(StatusEffects.WITHER))
+    public static final Consumable PROGESTERONE_CAPSULE_CONSUMABLE = Consumable.builder()
+            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(ModMobEffects.GIRL_POWER, 4800, 0)))
+            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 0)))
+            .onConsume(new RemoveStatusEffectsConsumeEffect(ModMobEffects.BOY_POWER))
+            .onConsume(new RemoveStatusEffectsConsumeEffect(MobEffects.SLOWNESS))
+            .onConsume(new RemoveStatusEffectsConsumeEffect(MobEffects.WEAKNESS))
+            .onConsume(new RemoveStatusEffectsConsumeEffect(MobEffects.WITHER))
             .build();
 
     // TESTOSTERONE ITEMS
 
-    public static final ConsumableComponent SMALL_CRUNCHY_TESTOSTERONE_CONSUMABLE = ConsumableComponent.builder()
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(ModEffects.BOY_POWER, 4800, 0)))
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 200, 0)))
+    public static final Consumable SMALL_CRUNCHY_TESTOSTERONE_CONSUMABLE = Consumable.builder()
+            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(ModMobEffects.BOY_POWER, 4800, 0)))
+            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.STRENGTH, 200, 0)))
             .build();
 
-    public static final ConsumableComponent LARGE_TESTOSTERONE_CONSUMABLE = ConsumableComponent.builder()
-            .sound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK)
-            .finishSound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK)
-            .useAction(UseAction.DRINK)
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(ModEffects.BOY_POWER, 14400, 0)))
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 500, 0)))
-            .consumeParticles(false)
+    public static final Consumable LARGE_TESTOSTERONE_CONSUMABLE = Consumable.builder()
+            .sound(SoundEvents.HONEY_DRINK)
+            .soundAfterConsume(SoundEvents.HONEY_DRINK)
+            .animation(ItemUseAnimation.DRINK)
+            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(ModMobEffects.BOY_POWER, 14400, 0)))
+            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.STRENGTH, 500, 0)))
+            .hasConsumeParticles(false)
             .build();
 
-    public static final ConsumableComponent ESTROGEN_BLOCKER_CONSUMABLE = ConsumableComponent.builder()
-            .consumeEffect(new RemoveEffectsConsumeEffect(ModEffects.GIRL_POWER))
-            .consumeEffect(new RemoveEffectsConsumeEffect(StatusEffects.SLOWNESS))
-            .consumeEffect(new RemoveEffectsConsumeEffect(StatusEffects.WEAKNESS))
-            .consumeEffect(new RemoveEffectsConsumeEffect(StatusEffects.WITHER))
+    public static final Consumable ESTROGEN_BLOCKER_CONSUMABLE = Consumable.builder()
+            .onConsume(new RemoveStatusEffectsConsumeEffect(ModMobEffects.GIRL_POWER))
+            .onConsume(new RemoveStatusEffectsConsumeEffect(MobEffects.SLOWNESS))
+            .onConsume(new RemoveStatusEffectsConsumeEffect(MobEffects.WEAKNESS))
+            .onConsume(new RemoveStatusEffectsConsumeEffect(MobEffects.WITHER))
             .build();
 
     // ENBY ITEMS
 
-    public static final ConsumableComponent SMALL_ENBY = ConsumableComponent.builder()
-            .sound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK)
-            .finishSound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK)
-            .useAction(UseAction.DRINK)
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(ModEffects.ENBY_POWER, 4800, 0)))
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 200, 0)))
-            .consumeParticles(false)
+    public static final Consumable SMALL_ENBY = Consumable.builder()
+            .sound(SoundEvents.HONEY_DRINK)
+            .soundAfterConsume(SoundEvents.HONEY_DRINK)
+            .animation(ItemUseAnimation.DRINK)
+            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(ModMobEffects.ENBY_POWER, 4800, 0)))
+            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.RESISTANCE, 200, 0)))
+            .hasConsumeParticles(false)
             .build();
 
-    public static final ConsumableComponent LARGE_ENBY = ConsumableComponent.builder()
-            .sound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK)
-            .finishSound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK)
-            .useAction(UseAction.DRINK)
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(ModEffects.ENBY_POWER, 14400, 0)))
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 600, 0)))
-            .consumeParticles(false)
+    public static final Consumable LARGE_ENBY = Consumable.builder()
+            .sound(SoundEvents.HONEY_DRINK)
+            .soundAfterConsume(SoundEvents.HONEY_DRINK)
+            .animation(ItemUseAnimation.DRINK)
+            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(ModMobEffects.ENBY_POWER, 14400, 0)))
+            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.RESISTANCE, 600, 0)))
+            .hasConsumeParticles(false)
             .build();
 
-    public static final ConsumableComponent REVERSE_DRINK = ConsumableComponent.builder()
+    public static final Consumable REVERSE_DRINK = Consumable.builder()
             .sound(ModSounds.REVERSE_DRINKING)
-            .finishSound(ModSounds.REVERSE_DRINKING)
-            .useAction(UseAction.DRINK)
-            .consumeParticles(false)
+            .soundAfterConsume(ModSounds.REVERSE_DRINKING)
+            .animation(ItemUseAnimation.DRINK)
+            .hasConsumeParticles(false)
             .build();
 
-    public static final ConsumableComponent NORMAL_DRINK = ConsumableComponent.builder()
-            .sound(SoundEvents.ENTITY_GENERIC_DRINK)
-            .finishSound(SoundEvents.ENTITY_GENERIC_DRINK)
-            .useAction(UseAction.DRINK)
-            .consumeParticles(false)
+    public static final Consumable NORMAL_DRINK = Consumable.builder()
+            .sound(SoundEvents.GENERIC_DRINK)
+            .soundAfterConsume(SoundEvents.GENERIC_DRINK)
+            .animation(ItemUseAnimation.DRINK)
+            .hasConsumeParticles(false)
             .build();
 
 }
