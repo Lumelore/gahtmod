@@ -1,6 +1,7 @@
 package net.lumelore.gahtmod.effect;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.lumelore.gahtmod.GAHTMod;
 import net.lumelore.gahtmod.network.GAHTPayloads;
 import net.lumelore.gahtmod.util.EffectUtil;
 import net.lumelore.gahtmod.util.PlayerDataSaver;
@@ -30,7 +31,7 @@ public class GirlPowerEffect extends MobEffect {
     // dashCooldown - Integer which stores the time in ticks until the player can dash again but zeros when player hits ground.
     // absoluteDashCooldown - Integer which stores the time in ticks until the player can dash again.
     @Override
-    public boolean applyEffectTick(@NonNull ServerLevel world, @NonNull LivingEntity entity, int amplifier) {
+    public boolean applyEffectTick(@NonNull ServerLevel level, @NonNull LivingEntity entity, int amplifier) {
         // Only apply effect to players
         if (entity instanceof Player player) {
 
@@ -41,14 +42,19 @@ public class GirlPowerEffect extends MobEffect {
             // Are pressing the jump key (getJumping)
             // Both dashCooldowns are zero
 
-            if (       !player.onGround()
-                    && !player.getAbilities().flying
-                    && ((PlayerDataSaver)player).getDashCooldown() == 0
-                    && ((PlayerDataSaver)player).getAbsoluteDashCooldown() == 0
+            if (   !player.onGround()
+                && !player.getAbilities().flying
+                && ((PlayerDataSaver)player).getDashCooldown() == 0
+                && ((PlayerDataSaver)player).getAbsoluteDashCooldown() == 0
             ) {
-                // Ask the client if the player is jumping, if so the rest is handled in EffectUtil
-                ServerPlayNetworking.send(world.getServer().getPlayerList().getPlayer(player.getUUID()),
-                        new GAHTPayloads.RequestJumpForBoostPayload((byte) 0));
+                try {
+                    // Ask the client if the player is jumping, if so the rest is handled in EffectUtil
+                    ServerPlayNetworking.send(level.getServer().getPlayerList().getPlayer(player.getUUID()),
+                            new GAHTPayloads.RequestJumpForBoostPayload((byte) 0));
+                }
+                catch (NullPointerException e) {
+                    GAHTMod.LOGGER.error("Caught NullPointerException in GirlPowerEffect. Cannot get player.", e);
+                }
             }
 
             // If they touch the ground, zero the regular dashCooldown
@@ -59,15 +65,15 @@ public class GirlPowerEffect extends MobEffect {
             if (((PlayerDataSaver)player).getDashCooldown() > 0) {
                 ((PlayerDataSaver)player).setDashCooldown(((PlayerDataSaver)player).getDashCooldown() - 1);
                 // Play recharge noise if zero
-                EffectUtil.playRechargeSoundIfRecharged(world, player);
+                EffectUtil.playRechargeSoundIfRecharged(level, player);
             }
             if (((PlayerDataSaver)player).getAbsoluteDashCooldown() > 0) {
                 ((PlayerDataSaver)player).setAbsoluteDashCooldown(((PlayerDataSaver)player).getAbsoluteDashCooldown() - 1);
                 // Play recharge noise if zero
-                EffectUtil.playRechargeSoundIfRecharged(world, player);
+                EffectUtil.playRechargeSoundIfRecharged(level, player);
             }
             // Spawn Particles if the player has recently dashed
-            EffectUtil.spawnParticleIfDashed(world, (ServerPlayer) entity);
+            EffectUtil.spawnParticleIfDashed(level, (ServerPlayer) player);
         }
         return true;
     }

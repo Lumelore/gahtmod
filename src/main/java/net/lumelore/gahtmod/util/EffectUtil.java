@@ -3,14 +3,12 @@ package net.lumelore.gahtmod.util;
 import net.lumelore.gahtmod.effect.ModMobEffects;
 import net.lumelore.gahtmod.network.GAHTPayloads;
 import net.lumelore.gahtmod.sound.ModSounds;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.Comparator;
@@ -37,43 +35,39 @@ public abstract class EffectUtil {
     public static void playRechargeSoundIfRecharged(ServerLevel level, Player player) {
         if (((PlayerDataSaver) player).getDashCooldown() == 0 && ((PlayerDataSaver) player).getAbsoluteDashCooldown() == 0) {
             // First param as player makes this client side, use null to make server side so all hear it
-            level.playPlayerSound(ModSounds.DASH_RECHARGE, SoundSource.PLAYERS, 1f, 1f);
+            level.playSound(null, player, ModSounds.DASH_RECHARGE, SoundSource.PLAYERS, 1f, 1f);
         }
     }
 
-    public static void spawnParticleIfDashed(Level level, ServerPlayer player) {
+    public static void spawnParticleIfDashed(ServerLevel level, ServerPlayer player) {
         // Account for faster recharge time if both effects are active
         if (player.getEffect(ModMobEffects.BOY_POWER) == null && ((PlayerDataSaver) player).getDashCooldown() > 45) {
-            level.addParticle(ParticleTypes.CLOUD, true, true, player.getX(), player.getY() + 0.2, player.getZ(), 0, 0, 0);
+            level.sendParticles(ParticleTypes.CLOUD, true, true, player.getX(), player.getY() + 0.2, player.getZ(), 1, 0, 0, 0, 0);
         }
         else if (player.getEffect(ModMobEffects.BOY_POWER) != null && ((PlayerDataSaver) player).getDashCooldown() > 15) {
-            level.addParticle(ParticleTypes.CLOUD, true, true, player.getX(), player.getY() + 0.2, player.getZ(), 0, 0, 0);
+            level.sendParticles(ParticleTypes.CLOUD, true, true, player.getX(), player.getY() + 0.2, player.getZ(), 1, 0, 0, 0, 0);
         }
     }
 
     public static void dash(Player player, GAHTPayloads.SendJumpForBoostPayload sendJumpForBoost) {
-
-
         /* Make the Player Dash Only if
         // They are not on the ground
         // They are not creative mode flying
-        // Haven't just recently jumped (jumpCooldown)
+        // Haven't just recently jumped (noJumpDelay)
         // Are pressing the jump key (isJumping)
         // Both dashCooldowns are zero */
 
         // These are checked in the effect (except for jumping), but we are gonna check again
         // when the server receives the packet just in case
-        if (!player.onGround()
-                && !player.getAbilities().flying
-                && sendJumpForBoost.isJumping()
-                && sendJumpForBoost.noJumpDelay() < 5
-                && ((PlayerDataSaver) player).getDashCooldown() == 0
-                && ((PlayerDataSaver) player).getAbsoluteDashCooldown() == 0
+        if (   !player.onGround()
+            && !player.getAbilities().flying
+            && sendJumpForBoost.isJumping()
+            && sendJumpForBoost.noJumpDelay() < 5
+            && ((PlayerDataSaver) player).getDashCooldown() == 0
+            && ((PlayerDataSaver) player).getAbsoluteDashCooldown() == 0
         ) {
 
-
-
-            player.addDeltaMovement(Vec3.directionFromRotation(clampPitch(player.getYHeadRot()), player.getXRot())
+            player.addDeltaMovement(Vec3.directionFromRotation(clampPitch(player.getXRot()), player.getYRot())
                     .scale((EffectUtil.getHighestGirlBoyAmplifier(player) + 1) * 0.8));
             player.syncVelocity = true;
 
@@ -87,7 +81,7 @@ public abstract class EffectUtil {
             }
 
             // Add audio to dash
-            player.playSound(ModSounds.DASH, 1f, 1f);
+            player.level().playSound(null, player, ModSounds.DASH, SoundSource.PLAYERS, 1f, 1f);
         }
     }
 
