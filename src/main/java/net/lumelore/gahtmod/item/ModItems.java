@@ -15,7 +15,7 @@ import java.util.function.Function;
 public abstract class ModItems {
 
     // Creative Tab Icon - Not Meant To Be Obtainable
-    public static final Item GAHT_ICON = registerItem("gaht_icon", Item::new, new Item.Properties().stacksTo(0));
+    public static final Item GAHT_ICON = registerItem("gaht_icon", Item::new, new Item.Properties().stacksTo(1));
 
     /* ============== *
      * Estrogen Items *
@@ -92,10 +92,11 @@ public abstract class ModItems {
      * ==== */
 
     private static Item registerItem(String name, Function<Item.Properties, Item> itemConstructor, Item.Properties properties) {
-        return Registry.register(BuiltInRegistries.ITEM, ResourceKey.create(Registries.ITEM, GAHTMod.idOf(name)),
-                itemConstructor.apply(properties));
+        ResourceKey<Item> rKey = ResourceKey.create(Registries.ITEM, GAHTMod.idOf(name));
+        Item item = itemConstructor.apply(properties.setId(rKey));
+        Registry.register(BuiltInRegistries.ITEM, rKey, item);
+        return item;
     }
-
     public static void registerModItems() {
         GAHTMod.LOGGER.info("Registering items for " + GAHTMod.MOD_ID + "...");
     }

@@ -1,37 +1,21 @@
 package net.lumelore.gahtmod.item.special;
 
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.AttributeModifiersComponent;
-import net.minecraft.component.type.ConsumableComponent;
-import net.minecraft.component.type.PotionContentsComponent;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffectUtil;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.consume.ApplyEffectsConsumeEffect;
-import net.minecraft.item.consume.RemoveEffectsConsumeEffect;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.registry.entry.RegistryEntryList;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import static net.lumelore.gahtmod.effect.ModEffects.BOY_POWER;
-import static net.lumelore.gahtmod.effect.ModEffects.GIRL_POWER;
+import static net.lumelore.gahtmod.effect.ModMobEffects.BOY_POWER;
+import static net.lumelore.gahtmod.effect.ModMobEffects.GIRL_POWER;
 
 public class TooltippedConsumableItem extends Item {
 
-    public TooltippedConsumableItem(Settings settings) {
-        super(settings);
+    public TooltippedConsumableItem(Properties properties) {
+        super(properties);
     }
-
+    /*
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         // Items may have potion effects in a ConsumableComponent or a PotionContentsComponent
@@ -193,6 +177,6 @@ public class TooltippedConsumableItem extends Item {
                     modifiers.add(built);
                 });
         return modifiers;
-    }
+    }*/
 
 }

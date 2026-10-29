@@ -61,6 +61,4 @@ public class NoRemaindersShapelessRecipe extends ShapelessRecipe {
         return NonNullList.withSize(input.size(), ItemStack.EMPTY);
     }
 
-
-
 }

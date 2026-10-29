@@ -4,20 +4,22 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.lumelore.gahtmod.network.GAHTPayloads;
 import net.lumelore.mixin.PlayerEntityAccessor;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.CompoundTag;
 
 public class GAHTModClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
 
-		ClientPlayNetworking.registerGlobalReceiver(GAHTPayloads.RequestJumpForBoostPayload.ID,
+		ClientPlayNetworking.registerGlobalReceiver(GAHTPayloads.RequestJumpForBoostPayload.TYPE,
 				(payload, context) -> {
-					// Collect jumping data, pack it into an NBT, and send it to server
-					NbtCompound jumpData = new NbtCompound();
-					jumpData.putBoolean("isJumping", ((PlayerEntityAccessor) context.player()).getJumping());
-					jumpData.putInt("jumpCooldown", ((PlayerEntityAccessor) context.player()).getJumpingCooldown());
-					ClientPlayNetworking.send(new GAHTPayloads.SendJumpForBoostPayload(jumpData));
+					// Collect jumping data, and send it to server
+					ClientPlayNetworking.send(
+							new GAHTPayloads.SendJumpForBoostPayload(
+									((PlayerEntityAccessor) context.player()).getJumping(),
+									((PlayerEntityAccessor) context.player()).getNoJumpDelay()
+							)
+					);
 				});
 
 	}
