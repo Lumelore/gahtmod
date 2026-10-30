@@ -22,7 +22,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BottleOfGenderfluidItem extends TooltippedConsumableItem {
+public class BottleOfGenderfluidItem extends GenderConsumableItem {
 
     public BottleOfGenderfluidItem(Properties properties) {
         super(properties.component(DataComponents.LORE,

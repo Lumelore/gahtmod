@@ -12,7 +12,7 @@ import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 
-public class LargeBottleEffectItem extends TooltippedConsumableItem {
+public class LargeBottleEffectItem extends GenderConsumableItem {
 
     public LargeBottleEffectItem(Properties properties) {
         super(properties);

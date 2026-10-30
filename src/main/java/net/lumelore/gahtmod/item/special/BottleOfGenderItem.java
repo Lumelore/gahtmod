@@ -11,7 +11,7 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 
-public class BottleOfGenderItem extends TooltippedConsumableItem {
+public class BottleOfGenderItem extends GenderConsumableItem {
 
     public BottleOfGenderItem(Properties properties) {
         super(properties
