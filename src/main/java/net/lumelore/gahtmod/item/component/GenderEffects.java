@@ -28,7 +28,11 @@ import net.minecraft.world.level.Level;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
+
+import static net.lumelore.gahtmod.effect.ModMobEffects.BOY_POWER;
+import static net.lumelore.gahtmod.effect.ModMobEffects.GIRL_POWER;
 
 public record GenderEffects(List<ConsumeEffect> onConsumeEffects) implements TooltipProvider {
 
@@ -100,6 +104,7 @@ public record GenderEffects(List<ConsumeEffect> onConsumeEffects) implements Too
         ArrayList<MutableComponent> addedEffects = new ArrayList<>();
         ArrayList<MutableComponent> removedEffects = new ArrayList<>();
         ArrayList<MutableComponent> modifiers = new ArrayList<>();
+        AtomicBoolean seenBoyOrGirlPower = new AtomicBoolean(false);
 
         onConsumeEffects.forEach(consumeEffect -> {
             // FOR APPLY EFFECTS
@@ -114,8 +119,15 @@ public record GenderEffects(List<ConsumeEffect> onConsumeEffects) implements Too
                                         context.tickRate())
                             )
                             .withStyle(effect.getEffect().value().getCategory().getTooltipFormatting()));
-                    // Add modifiers
-                    modifiers.addAll(buildModifierText(effect));
+
+                    // Add modifiers (but only once for girl/boy power)
+                    if (effect.getEffect() != BOY_POWER && effect.getEffect() != GIRL_POWER) {
+                        modifiers.addAll(buildModifierText(effect));
+                    } else if (!seenBoyOrGirlPower.get()) {
+                        modifiers.addAll(buildModifierText(effect));
+                        seenBoyOrGirlPower.set(true);
+                    }
+
                 });
             }
             // FOR REMOVING EFFECTS
