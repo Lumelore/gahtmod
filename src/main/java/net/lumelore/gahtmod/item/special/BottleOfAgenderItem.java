@@ -3,6 +3,8 @@ package net.lumelore.gahtmod.item.special;
 import net.lumelore.gahtmod.GAHTMod;
 import net.lumelore.gahtmod.effect.ModMobEffects;
 import net.lumelore.gahtmod.item.ModItems;
+import net.lumelore.gahtmod.item.component.GenderEffects;
+import net.lumelore.gahtmod.item.component.ModComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.core.component.DataComponents;
@@ -17,14 +19,12 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.component.ItemLore;
+import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class BottleOfAgenderItem extends Item {
 
@@ -79,32 +79,62 @@ public class BottleOfAgenderItem extends Item {
         return itemStack;
     }
 
+    @Override
+    public InteractionResult use(Level level, Player player, InteractionHand hand) {
+        // Don't use if no gender effects present
+        if (   player.getEffect(ModMobEffects.GIRL_POWER) == null
+                && player.getEffect(ModMobEffects.BOY_POWER)  == null
+                && player.getEffect(ModMobEffects.ENBY_POWER) == null
+        ) {
+            return InteractionResult.PASS;
+        }
+        return super.use(level, player, hand);
+    }
+
     private void loadDataIntoItem(Player player, ItemStack stack) {
-        ArrayList<MobEffectInstance> potionList = new ArrayList<>(3);
+        GenderEffects.Builder genderBuilder = GenderEffects.builder();
         try {
             // Put girl power into list if player has it
             if (player.getEffect(ModMobEffects.GIRL_POWER) != null
                     && player.getEffect(ModMobEffects.GIRL_POWER).getDuration() > 20
             ) {
-                potionList.add(new MobEffectInstance(ModMobEffects.GIRL_POWER,
-                        player.getEffect(ModMobEffects.GIRL_POWER).getDuration(),
-                        player.getEffect(ModMobEffects.GIRL_POWER).getAmplifier()));
+                genderBuilder.addEffect(
+                        new ApplyStatusEffectsConsumeEffect(
+                                new MobEffectInstance(
+                                        ModMobEffects.GIRL_POWER,
+                                        player.getEffect(ModMobEffects.GIRL_POWER).getDuration(),
+                                        player.getEffect(ModMobEffects.GIRL_POWER).getAmplifier()
+                                )
+                        )
+                );
             }
             // Put boy power into list if player has it
             if (player.getEffect(ModMobEffects.BOY_POWER) != null
                     && player.getEffect(ModMobEffects.BOY_POWER).getDuration() > 20
             ) {
-                potionList.add(new MobEffectInstance(ModMobEffects.BOY_POWER,
-                        player.getEffect(ModMobEffects.BOY_POWER).getDuration(),
-                        player.getEffect(ModMobEffects.BOY_POWER).getAmplifier()));
+                genderBuilder.addEffect(
+                        new ApplyStatusEffectsConsumeEffect(
+                                new MobEffectInstance(
+                                        ModMobEffects.BOY_POWER,
+                                        player.getEffect(ModMobEffects.BOY_POWER).getDuration(),
+                                        player.getEffect(ModMobEffects.BOY_POWER).getAmplifier()
+                                )
+                        )
+                );
             }
             // Put enby power into list if player has it
             if (player.getEffect(ModMobEffects.ENBY_POWER) != null
                     && player.getEffect(ModMobEffects.ENBY_POWER).getDuration() > 20
             ) {
-                potionList.add(new MobEffectInstance(ModMobEffects.ENBY_POWER,
-                        player.getEffect(ModMobEffects.ENBY_POWER).getDuration(),
-                        player.getEffect(ModMobEffects.ENBY_POWER).getAmplifier()));
+                genderBuilder.addEffect(
+                        new ApplyStatusEffectsConsumeEffect(
+                                new MobEffectInstance(
+                                        ModMobEffects.ENBY_POWER,
+                                        player.getEffect(ModMobEffects.ENBY_POWER).getDuration(),
+                                        player.getEffect(ModMobEffects.ENBY_POWER).getAmplifier()
+                                )
+                        )
+                );
             }
         } catch (NullPointerException e) {
             // getDuration() and getAmplifier() throw if the player doesn't have the effect. Given that I do a null
@@ -112,19 +142,7 @@ public class BottleOfAgenderItem extends Item {
             // when it runs out. Better to be safe than sorry tho.
             GAHTMod.LOGGER.warn("Caught NullPointerException while loading effects into Bottle of Agender.");
         }
-        stack.set(DataComponents.POTION_CONTENTS, new PotionContents(Optional.empty(), Optional.empty(), potionList, Optional.empty()));
-    }
-
-    @Override
-    public InteractionResult use(Level level, Player player, InteractionHand hand) {
-        // Don't use if no gender effects present
-        if (   player.getEffect(ModMobEffects.GIRL_POWER) == null
-            && player.getEffect(ModMobEffects.BOY_POWER)  == null
-            && player.getEffect(ModMobEffects.ENBY_POWER) == null
-        ) {
-            return InteractionResult.PASS;
-        }
-        return super.use(level, player, hand);
+        stack.set(ModComponents.GENDER_EFFECTS, genderBuilder.build());
     }
 
 }
