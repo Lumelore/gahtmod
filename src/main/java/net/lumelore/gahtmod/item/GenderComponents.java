@@ -12,7 +12,7 @@ import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 import net.minecraft.world.item.consume_effects.RemoveStatusEffectsConsumeEffect;
 
-public class GAHTComponents {
+public class GenderComponents {
     // 28800 ticks is 24 minutes
     // 16800 ticks is 14 minutes
     // 14400 ticks is 12 minutes
