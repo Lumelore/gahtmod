@@ -55,7 +55,7 @@ public class GenderComponents {
 
     public static final GenderEffects BOTTLE_OF_ESTROGEN = GenderEffects.builder()
             .addEffect(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(ModMobEffects.GIRL_POWER, 14400, 0)))
-            .addEffect(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.REGENERATION, 160, 0)))
+            .addEffect(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.REGENERATION, 160, 1)))
             .build();
 
     public static final GenderEffects TESTOSTERONE_BLOCKER = GenderEffects.builder()
