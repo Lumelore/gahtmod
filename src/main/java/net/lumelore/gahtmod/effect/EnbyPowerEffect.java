@@ -1,58 +1,86 @@
 package net.lumelore.gahtmod.effect;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Optional;
+import java.util.function.Predicate;
 
-public class EnbyPowerEffect extends StatusEffect {
+public class EnbyPowerEffect extends MobEffect {
 
     protected EnbyPowerEffect() {
         // Color is a rich purple :3
-        super(StatusEffectCategory.BENEFICIAL, 0x8518C4);
+        super(MobEffectCategory.BENEFICIAL, 0x8518C4);
     }
 
     // Should always be true
     @Override
-    public boolean canApplyUpdateEffect(int duration, int amplifier) {
+    public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
         return true;
     }
 
     @Override
-    public boolean applyUpdateEffect(ServerWorld world, LivingEntity entity, int amplifier) {
-        if (entity instanceof PlayerEntity) {
+    public boolean applyEffectTick(@NonNull ServerLevel world, @NonNull LivingEntity entity, int amplifier) {
+        if (entity instanceof Player player) {
             // Apply effect if player is walking into a block that they can climb
             // and also isn't creative flying
-            if (entity.horizontalCollision && canClimb((PlayerEntity) entity, world) && !((PlayerEntity) entity).getAbilities().flying) {
-                entity.setVelocity(entity.getVelocity().getX(), 0.2, entity.getVelocity().getZ());
-                entity.velocityModified = true;
+            if (entity.horizontalCollision && canClimb(player, world) && !player.getAbilities().flying) {
+                entity.setDeltaMovement(entity.getDeltaMovement().get(Direction.Axis.X), 0.2, entity.getDeltaMovement().get(Direction.Axis.Z));
+                entity.syncVelocity = true;
+
             }
             // Hold entity in place vertically if sneaking while climbing
-            else if (canClimb((PlayerEntity) entity, world) && entity.isSneaking() && !((PlayerEntity) entity).getAbilities().flying) {
-                entity.setVelocity(entity.getVelocity().getX(), entity.getFinalGravity(), entity.getVelocity().getZ());
-                entity.velocityModified = true;
+            else if (canClimb(player, world) && player.isCrouching() && !player.getAbilities().flying) {
+                entity.setDeltaMovement(entity.getDeltaMovement().get(Direction.Axis.X), entity.getGravity(), entity.getDeltaMovement().get(Direction.Axis.Z));
+                entity.syncVelocity = true;
             }
         }
         return true;
     }
 
-    private boolean canClimb(PlayerEntity entity, ServerWorld world) {
-        // Find the adjacent block at head height that is solid.
-        Optional<BlockPos> closetBlock = BlockPos.findClosest(entity.getBlockPos().up(), 1, 0, b->entity.getWorld().getBlockState(b).isSideSolidFullSquare(world, b, entity.getMovementDirection().getOpposite()));
-        Optional<BlockPos> closetBlockUnder = BlockPos.findClosest(entity.getBlockPos(), 1, 0, b->entity.getWorld().getBlockState(b).isSideSolidFullSquare(world, b, entity.getMovementDirection().getOpposite()));
+    private boolean canClimb(Player player, ServerLevel world) {
+        Optional<BlockPos> closetBlock = findClosest(player, 1, 1, b->player.level().getBlockState(b).isFaceSturdy(world, b, player.getMotionDirection().getOpposite()));
+        Optional<BlockPos> closetBlockUnder = findClosest(player, 1, 0, b->player.level().getBlockState(b).isFaceSturdy(world, b, player.getMotionDirection().getOpposite()));
         // If it has been found, player can climb
         if (!closetBlock.equals(Optional.empty())) {
             return true;
         }
 
         // Can also climb if block underneath closetBlock is solid, but player is not on the ground.
-        else return closetBlockUnder.isPresent() && entity.getWorld().getBlockState(closetBlockUnder.get().down())
-                .isSideSolidFullSquare(world, closetBlockUnder.get(), entity.getMovementDirection().getOpposite())
-                 && !entity.isOnGround();
+        else return closetBlockUnder.isPresent() && world.getBlockState(closetBlockUnder.get().below())
+                .isFaceSturdy(world, closetBlockUnder.get(), player.getMotionDirection().getOpposite())
+                 && !player.onGround();
+    }
+
+    /**
+     * Search in a square centered on the entity
+     * @param entity The entity to center the search around
+     * @param range The search radius
+     * @param verticalOffset 0 to search at player feet. 1 to search at player head.
+     * @param condition The condition the block should match
+     * @return The block matching the condition or an empty
+     */
+    private static Optional<BlockPos> findClosest(LivingEntity entity, int range, int verticalOffset, Predicate<BlockPos> condition) {
+        // A method like this used to exist in vanilla. Maybe it still does, but I can't find it,
+        // so I had to recreate the functionality I wanted myself.
+        Vec3 root = entity.position().add(0, verticalOffset, 0);
+
+        for (int x = -range; x <= range; x++) {
+            for (int z = -range; z <= range; z++) {
+                BlockPos toCheck = BlockPos.containing(root.x() + x, root.y(), root.z() + z);
+                if (condition.test(toCheck)) {
+                    return Optional.of(toCheck);
+                }
+            }
+        }
+        return Optional.empty();
     }
 
 }

@@ -1,14 +1,17 @@
 package net.lumelore.gahtmod;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.item.v1.ItemComponentTooltipProviderRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.lumelore.gahtmod.effect.ModEffects;
+import net.lumelore.gahtmod.effect.ModMobEffects;
 import net.lumelore.gahtmod.item.ModItemGroups;
 import net.lumelore.gahtmod.item.ModItems;
+import net.lumelore.gahtmod.item.component.ModComponents;
 import net.lumelore.gahtmod.network.GAHTPayloads;
 import net.lumelore.gahtmod.recipe.ModRecipes;
 import net.lumelore.gahtmod.sound.ModSounds;
 import net.lumelore.gahtmod.util.EffectUtil;
+import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,18 +24,26 @@ public class GAHTMod implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		// Registers
+		ModComponents.registerComponents();
 		ModItems.registerModItems();
 		ModItemGroups.registerItemGroups();
-		ModEffects.registerModEffects();
+		ModMobEffects.registerModEffects();
 		ModSounds.registerSounds();
         ModRecipes.registerRecipes();
 		GAHTPayloads.registerPayloads();
 
+		// Tooltip Registers
+		ItemComponentTooltipProviderRegistry.addFirst(ModComponents.GENDER_EFFECTS);
+
 		// Receiver Registers
-		ServerPlayNetworking.registerGlobalReceiver(GAHTPayloads.SendJumpForBoostPayload.ID, (sendJumpForBoost, context) -> {
+		ServerPlayNetworking.registerGlobalReceiver(GAHTPayloads.SendJumpForBoostPayload.TYPE, (sendJumpForBoost, context) -> {
             EffectUtil.dash(context.player(), sendJumpForBoost);
 		});
 
+	}
+
+	public static Identifier idOf(String path) {
+		return Identifier.fromNamespaceAndPath(MOD_ID, path);
 	}
 
 }
