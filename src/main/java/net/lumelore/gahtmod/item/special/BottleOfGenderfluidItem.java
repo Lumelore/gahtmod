@@ -7,6 +7,7 @@ import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.effect.MobEffect;
@@ -25,13 +26,14 @@ import java.util.List;
 public class BottleOfGenderfluidItem extends GenderConsumableItem {
 
     public BottleOfGenderfluidItem(Properties properties) {
-        super(properties.component(DataComponents.LORE,
-                new ItemLore(List.of(
-                        Component.translatable("tooltip.gahtmod.bottle_of_genderfluid.line1")
-                                .withStyle(ChatFormatting.GRAY),
-                        Component.translatable("tooltip.gahtmod.bottle_of_genderfluid.line2")
-                                .withStyle(ChatFormatting.GRAY)
-                        )))
+        super(properties
+                .component(DataComponents.LORE,
+                    new ItemLore(List.of(
+                            Component.translatable("tooltip.gahtmod.bottle_of_genderfluid.line1")
+                                    .withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(false)),
+                            Component.translatable("tooltip.gahtmod.bottle_of_genderfluid.line2")
+                                    .withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(false))
+                            )))
 
         );
     }

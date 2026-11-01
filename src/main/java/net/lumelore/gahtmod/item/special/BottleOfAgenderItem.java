@@ -9,6 +9,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Prediction;
@@ -33,7 +34,8 @@ public class BottleOfAgenderItem extends Item {
                 .component(DataComponents.LORE,
                         new ItemLore(List.of(Component
                                 .translatable("tooltip.gahtmod.bottle_of_agender")
-                                .withStyle(ChatFormatting.GRAY))))
+                                .withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(false))
+                        )))
         );
     }
 
