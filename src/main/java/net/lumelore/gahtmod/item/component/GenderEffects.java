@@ -110,9 +110,17 @@ public record GenderEffects(List<ConsumeEffect> onConsumeEffects) implements Too
             // FOR APPLY EFFECTS
             if (consumeEffect instanceof ApplyStatusEffectsConsumeEffect applyEffect) {
                 applyEffect.effects().forEach(effect -> {
+                    // Get amplifier text if present
+                    MutableComponent fullDesc = effect.getAmplifier() > 0
+                            ? Component.translatable("potion.withAmplifier",
+                                    Component.translatable(effect.getDescriptionId()),
+                                    Component.translatable("potion.potency." + effect.getAmplifier()))
+                            // Else just do effect name with no amplifier
+                            : Component.translatable(effect.getDescriptionId());
+
                     addedEffects.add(Component.translatable(
                             "potion.withDuration",
-                           Component.translatable("potion.withAmplifier", Component.translatable(effect.getDescriptionId()), Component.translatable("potion.potency." + effect.getAmplifier())),
+                                 fullDesc,
                                  MobEffectUtil.formatDuration(
                                         effect,
                                         components.getOrDefault(DataComponents.POTION_DURATION_SCALE, 1F),
